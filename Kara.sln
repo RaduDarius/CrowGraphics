@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34931.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Kara", "Kara\Kara.vcxproj", "{B005E2C7-07B2-41ED-B9A8-654290A4BFC9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox", "Sandbox\Sandbox.vcxproj", "{64007941-E20E-4640-A232-CC7DC46E6743}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B005E2C7-07B2-41ED-B9A8-654290A4BFC9}.Debug|x64.ActiveCfg = Debug|x64
+		{B005E2C7-07B2-41ED-B9A8-654290A4BFC9}.Debug|x64.Build.0 = Debug|x64
+		{B005E2C7-07B2-41ED-B9A8-654290A4BFC9}.Release|x64.ActiveCfg = Release|x64
+		{B005E2C7-07B2-41ED-B9A8-654290A4BFC9}.Release|x64.Build.0 = Release|x64
+		{64007941-E20E-4640-A232-CC7DC46E6743}.Debug|x64.ActiveCfg = Debug|x64
+		{64007941-E20E-4640-A232-CC7DC46E6743}.Debug|x64.Build.0 = Debug|x64
+		{64007941-E20E-4640-A232-CC7DC46E6743}.Release|x64.ActiveCfg = Release|x64
+		{64007941-E20E-4640-A232-CC7DC46E6743}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB452E90-E285-4BCD-A764-6A6E9D1774E1}
+	EndGlobalSection
+EndGlobal
