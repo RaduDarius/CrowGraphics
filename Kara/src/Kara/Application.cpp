@@ -2,19 +2,37 @@
 
 #include "Application.hpp"
 
-#include "Kara/EventSystem/WindowEvent.hpp"
+#include "Kara/EventSystem/Dispatcher.hpp"
 #include "Kara/Log/Logger.hpp"
 
 namespace Kara {
-Application::Application() { Log::Logger::Init(); }
-
-Application::~Application() {}
+Application::Application() {
+  Log::Logger::Init();
+  mWindow = std::unique_ptr<Core::Window>(Core::Window::Create());
+  mWindow->SetEventCallback(
+      [&](EventSystem::Event& e) { return OnEvent(e); });
+}
 
 void Application::Run() {
-  EventSystem::WindowResizedEvent e{1280, 720};
-  KARA_CORE_TRACE(e.ToString());
-
-  while (true)
-    ;
+  while (mRunning) {
+    mWindow->OnUpdate();
+  }
 }
+
+void Application::OnEvent(EventSystem::Event& aEvent) {
+  KARA_CORE_TRACE("{0}", aEvent.ToString());
+
+  EventSystem::Dispatcher dispatcher{aEvent};
+
+  dispatcher.Dispatch<EventSystem::WindowClosedEvent>(
+      [&](Kara::EventSystem::WindowClosedEvent& e) -> bool {
+        return OnClose(e);
+      });
+}
+
+bool Application::OnClose(EventSystem::WindowClosedEvent& aEvent) {
+  mRunning = false;
+  return true;
+}
+
 }  // namespace Kara

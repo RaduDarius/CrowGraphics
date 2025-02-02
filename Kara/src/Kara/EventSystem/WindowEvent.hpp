@@ -8,7 +8,7 @@ namespace EventSystem {
 //! Events that are specific to a WINDOW:
 //! WindowClose, WindowResize, WindowMoved.
 
-class WindowResizedEvent : Event {
+class WindowResizedEvent : public Event {
  public:
   using Size = Point;
 
@@ -32,7 +32,7 @@ class WindowResizedEvent : Event {
   Size mSize;
 };
 
-class WindowMovedEvent : Event {
+class WindowMovedEvent : public Event {
  public:
   using Position = Point;
 
@@ -55,7 +55,7 @@ class WindowMovedEvent : Event {
   Position mPosition;
 };
 
-class WindowClosedEvent : Event {
+class WindowClosedEvent : public Event {
  public:
   virtual inline std::string ToString() const override { return GetName(); }
 

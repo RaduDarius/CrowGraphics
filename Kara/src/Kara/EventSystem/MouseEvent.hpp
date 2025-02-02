@@ -9,7 +9,7 @@ namespace EventSystem {
 //! Events that are specific to the MOUSE:
 //! MouseMoved, MouseScrolled, MouseButtonPressed, MouseButtonReleased.
 
-class MouseMovedEvent : Event {
+class MouseMovedEvent : public Event {
  public:
   using Position = Point;
 
@@ -32,7 +32,7 @@ class MouseMovedEvent : Event {
   Position mPosition;
 };
 
-class MouseScrolledEvent : Event {
+class MouseScrolledEvent : public Event {
  public:
   using Offset = Point;
 
@@ -57,7 +57,7 @@ class MouseScrolledEvent : Event {
 };
 
 //! Base class for BUTTON related events that need to store a BUTTONCODE.
-class MouseButtonEvent : Event {
+class MouseButtonEvent : public Event {
  public:
   using ButtonCode = int;
 
@@ -76,7 +76,7 @@ class MouseButtonEvent : Event {
   ButtonCode mButton;
 };
 
-class MouseButtonPressedEvent : MouseButtonEvent {
+class MouseButtonPressedEvent : public MouseButtonEvent {
  public:
   MouseButtonPressedEvent(const ButtonCode aButton)
       : MouseButtonEvent{aButton} {}
@@ -84,7 +84,7 @@ class MouseButtonPressedEvent : MouseButtonEvent {
   EVENT_TYPE(MouseButtonPressed);
 };
 
-class MouseButtonReleasedEvent : MouseButtonEvent {
+class MouseButtonReleasedEvent : public MouseButtonEvent {
  public:
   MouseButtonReleasedEvent(const ButtonCode aButton)
       : MouseButtonEvent{aButton} {}

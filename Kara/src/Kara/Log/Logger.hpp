@@ -31,3 +31,15 @@ class KARA_API Logger {
   ::Kara::Log::Logger::GetCoreLogger()->info(__VA_ARGS__);
 #define KARA_CORE_TRACE(...) \
   ::Kara::Log::Logger::GetCoreLogger()->trace(__VA_ARGS__);
+
+#ifdef KARA_ENABLE_ASSERTS
+#define KARA_CORE_ASSERT(x, ...)                          \
+  {                                                       \
+    if (!(x)) {                                           \
+      KARA_CORE_ERROR("Assert Failed: {0}", __VA_ARGS__); \
+      __debugbreak;                                       \
+    }                                                     \
+  }
+#else
+#define KARA_CORE_ASSERT(x, ...)
+#endif

@@ -5,6 +5,9 @@ workspace "Kara"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include other submodules 
+include "Kara/vendor/GLFW"
+
 -- Project: Kara
 project "Kara"
     location "Kara"
@@ -19,8 +22,14 @@ project "Kara"
 
     files { "%{prj.name}/src/**.hpp", "%{prj.name}/src/**.cpp" }
 
-    includedirs { "%{prj.name}/vendor/spdlog/include", "%{prj.name}/src" }
+    includedirs { 
+        "%{prj.name}/vendor/spdlog/include",
+        "%{prj.name}/vendor/GLFW/include", 
+        "%{prj.name}/src" 
+    }
     
+    links { "GLFW", "opengl32.lib" }
+
     filter "system:windows"
         cppdialect "C++17"
         staticruntime "On"
@@ -33,7 +42,7 @@ project "Kara"
         buildoptions { "/utf-8" }
 
     filter "configurations:Debug"
-        defines "KARA_DEBUG"
+        defines {"KARA_DEBUG", "KARA_ENABLE_ASSERTS"}
         symbols "On"
 
     filter "configurations:Release"

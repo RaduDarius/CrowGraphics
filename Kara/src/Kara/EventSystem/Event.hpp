@@ -29,6 +29,8 @@ enum class EventType {
   virtual const char* GetName() const override { return #type; }
 
 class Event {
+  friend class Dispatcher;
+
  public:
   virtual const char* GetName() const = 0;
   virtual EventType GetType() const = 0;
