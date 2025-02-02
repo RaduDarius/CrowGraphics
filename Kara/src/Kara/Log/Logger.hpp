@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #include "Kara/Core/Core.hpp"
 #include "spdlog/spdlog.h"
 
@@ -11,10 +9,10 @@ class KARA_API Logger {
  public:
   static void Init();
 
-  inline static std::shared_ptr<spdlog::logger>& GetClientLogger() {
+  static std::shared_ptr<spdlog::logger>& GetClientLogger() {
     return smClientLogger;
   }
-  inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() {
+  static std::shared_ptr<spdlog::logger>& GetCoreLogger() {
     return smCoreLogger;
   }
 

@@ -56,7 +56,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>KARA_PLATFORM_WINDOWS;KARA_BUILD_DLL;KARA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -78,7 +79,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>KARA_PLATFORM_WINDOWS;KARA_BUILD_DLL;KARA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -106,13 +108,23 @@
     <ClInclude Include="src\Kara.hpp" />
     <ClInclude Include="src\Kara\Application.hpp" />
     <ClInclude Include="src\Kara\Core\Core.hpp" />
+    <ClInclude Include="src\Kara\Core\Types.hpp" />
     <ClInclude Include="src\Kara\EntryPoint.hpp" />
+    <ClInclude Include="src\Kara\EventSystem\Dispatcher.hpp" />
+    <ClInclude Include="src\Kara\EventSystem\Event.hpp" />
+    <ClInclude Include="src\Kara\EventSystem\KeyEvent.hpp" />
+    <ClInclude Include="src\Kara\EventSystem\MouseEvent.hpp" />
+    <ClInclude Include="src\Kara\EventSystem\WindowEvent.hpp" />
     <ClInclude Include="src\Kara\Log\Include.hpp" />
     <ClInclude Include="src\Kara\Log\Logger.hpp" />
+    <ClInclude Include="src\pch.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Kara\Application.cpp" />
     <ClCompile Include="src\Kara\Log\Logger.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

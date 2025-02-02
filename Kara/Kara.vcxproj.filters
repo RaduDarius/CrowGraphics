@@ -7,6 +7,9 @@
     <Filter Include="Kara\Core">
       <UniqueIdentifier>{7CE6AFC4-E850-643B-318F-15E19D384290}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kara\EventSystem">
+      <UniqueIdentifier>{5AB7C495-46B0-E3E7-6FE2-C86C5B3AC3F3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Kara\Log">
       <UniqueIdentifier>{7525B0EE-61F2-0AFA-8A0B-F9A176374088}</UniqueIdentifier>
     </Filter>
@@ -19,13 +22,34 @@
     <ClInclude Include="src\Kara\Core\Core.hpp">
       <Filter>Kara\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Kara\Core\Types.hpp">
+      <Filter>Kara\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Kara\EntryPoint.hpp">
       <Filter>Kara</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kara\EventSystem\Dispatcher.hpp">
+      <Filter>Kara\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kara\EventSystem\Event.hpp">
+      <Filter>Kara\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kara\EventSystem\KeyEvent.hpp">
+      <Filter>Kara\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kara\EventSystem\MouseEvent.hpp">
+      <Filter>Kara\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kara\EventSystem\WindowEvent.hpp">
+      <Filter>Kara\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kara\Log\Include.hpp">
+      <Filter>Kara\Log</Filter>
     </ClInclude>
     <ClInclude Include="src\Kara\Log\Logger.hpp">
       <Filter>Kara\Log</Filter>
     </ClInclude>
-    <ClInclude Include="src\Kara\Log\Include.hpp" />
+    <ClInclude Include="src\pch.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Kara\Application.cpp">
@@ -34,5 +58,6 @@
     <ClCompile Include="src\Kara\Log\Logger.cpp">
       <Filter>Kara\Log</Filter>
     </ClCompile>
+    <ClCompile Include="src\pch.cpp" />
   </ItemGroup>
 </Project>

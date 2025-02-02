@@ -14,10 +14,13 @@ project "Kara"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-temp/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "pch.hpp"
+    pchsource "%{prj.name}/src/pch.cpp"
+
     files { "%{prj.name}/src/**.hpp", "%{prj.name}/src/**.cpp" }
 
     includedirs { "%{prj.name}/vendor/spdlog/include", "%{prj.name}/src" }
-
+    
     filter "system:windows"
         cppdialect "C++17"
         staticruntime "On"
