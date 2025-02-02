@@ -3,13 +3,12 @@
 #include "Log/Logger.hpp"
 
 namespace Kara {
-	Application::Application() {
-		Log::Logger::Init();
-	}
+Application::Application() { Log::Logger::Init(); }
 
-	Application::~Application() {}
+Application::~Application() {}
 
-	void Application::Run() {
-		while (true);
-	}
+void Application::Run() {
+  while (true)
+    ;
 }
+}  // namespace Kara

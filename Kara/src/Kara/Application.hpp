@@ -3,13 +3,13 @@
 #include "Core/Core.hpp"
 
 namespace Kara {
-	class KARA_API Application {
-	public:
-		Application();
-		virtual ~Application();
+class KARA_API Application {
+ public:
+  Application();
+  virtual ~Application();
 
-		void Run();
-	};
+  void Run();
+};
 
-	Application* CreateApplication();
-}
+Application* CreateApplication();
+}  // namespace Kara

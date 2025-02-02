@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Kara">
+      <UniqueIdentifier>{A4DB877C-9012-890D-39FF-6E102515050F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kara\Core">
+      <UniqueIdentifier>{7CE6AFC4-E850-643B-318F-15E19D384290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kara\Log">
+      <UniqueIdentifier>{7525B0EE-61F2-0AFA-8A0B-F9A176374088}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Kara.hpp" />
+    <ClInclude Include="src\Kara\Application.hpp">
+      <Filter>Kara</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kara\Core\Core.hpp">
+      <Filter>Kara\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kara\EntryPoint.hpp">
+      <Filter>Kara</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kara\Log\Logger.hpp">
+      <Filter>Kara\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kara\Log\Include.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Kara\Application.cpp">
+      <Filter>Kara</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kara\Log\Logger.cpp">
+      <Filter>Kara\Log</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

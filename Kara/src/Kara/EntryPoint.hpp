@@ -4,7 +4,5 @@
 
 extern Kara::Application* Kara::CreateApplication();
 
-int main(int argc, char** argv) {
-	Kara::CreateApplication()->Run();
-}
+int main(int argc, char** argv) { Kara::CreateApplication()->Run(); }
 #endif
