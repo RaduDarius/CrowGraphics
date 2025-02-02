@@ -1,7 +1,11 @@
 #include "Application.hpp"
 
+#include "Log/Logger.hpp"
+
 namespace Kara {
-	Application::Application() {}
+	Application::Application() {
+		Log::Logger::Init();
+	}
 
 	Application::~Application() {}
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef KR_PLATFORM_WINDOWS
+#ifdef KARA_PLATFORM_WINDOWS
 
 extern Kara::Application* Kara::CreateApplication();
 
