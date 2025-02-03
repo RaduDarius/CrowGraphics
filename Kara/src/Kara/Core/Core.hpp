@@ -1,5 +1,7 @@
 #pragma once
 
+#include "pch.hpp"
+
 #if KARA_PLATFORM_WINDOWS
 #ifdef KARA_BUILD_DLL
 #define KARA_API __declspec(dllexport)

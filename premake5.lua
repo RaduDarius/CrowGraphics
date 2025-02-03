@@ -7,6 +7,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include other submodules 
 include "Kara/vendor/GLFW"
+include "Kara/vendor/GLAD"
 
 -- Project: Kara
 project "Kara"
@@ -25,10 +26,15 @@ project "Kara"
     includedirs { 
         "%{prj.name}/vendor/spdlog/include",
         "%{prj.name}/vendor/GLFW/include", 
+        "%{prj.name}/vendor/GLAD/include", 
         "%{prj.name}/src" 
     }
     
-    links { "GLFW", "opengl32.lib" }
+    links { 
+        "GLFW", 
+        "GLAD", 
+        "opengl32.lib" 
+     }
 
     filter "system:windows"
         cppdialect "C++17"
@@ -43,10 +49,12 @@ project "Kara"
 
     filter "configurations:Debug"
         defines {"KARA_DEBUG", "KARA_ENABLE_ASSERTS"}
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines "KARA_RELEASE"
+        buildoptions "/MD"
         optimize "On"
 
 -- Project: Sandbox
@@ -75,8 +83,10 @@ project "Sandbox"
     
     filter "configurations:Debug"
         defines "KARA_DEBUG"
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines "KARA_RELEASE"
+        buildoptions "/MD"
         optimize "On"

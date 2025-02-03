@@ -2,24 +2,37 @@
 
 #include "Kara/Core/Core.hpp"
 #include "Kara/Core/Window.hpp"
-#include "Kara/EventSystem/Event.hpp"
-#include "Kara/EventSystem/WindowEvent.hpp"
+#include "Kara/LayerSystem/LayerStack.hpp"
 
 namespace Kara {
+namespace EventSystem {
+class Event;
+class WindowClosedEvent;
+} // namespace EventSystem
+
+namespace LayerSystem {
+class Layer;
+} // namespace LayerSystem
+
 class KARA_API Application {
- public:
+public:
   Application();
 
   void Run();
 
-  void OnEvent(EventSystem::Event& aEvent);
+  void OnEvent(EventSystem::Event &aEvent);
 
- private:
-  bool OnClose(EventSystem::WindowClosedEvent& aEvent);
+  void Push(LayerSystem::Layer *aLayer);
+  void Pop(LayerSystem::Layer *aLayer);
+
+private:
+  bool OnClose(EventSystem::WindowClosedEvent &aEvent);
 
   std::unique_ptr<Core::Window> mWindow;
+  std::unique_ptr<LayerSystem::LayerStack> mLayerStack;
+
   bool mRunning{true};
 };
 
-Application* CreateApplication();
-}  // namespace Kara
+Application *CreateApplication();
+} // namespace Kara
