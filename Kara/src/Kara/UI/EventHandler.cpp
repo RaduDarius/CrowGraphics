@@ -67,7 +67,7 @@ void EventHandler::OnEvent(EventSystem::Event &aEvent) {
 bool EventHandler::OnMouseButtonPressedEvent(
     EventSystem::MouseButtonPressedEvent &aEvent) {
   auto &io = ImGui::GetIO();
-  io.MouseDown[aEvent.GetButton()] = true;
+  io.AddMouseButtonEvent(aEvent.GetButton(), true);
 
   return false;
 }
@@ -75,14 +75,14 @@ bool EventHandler::OnMouseButtonPressedEvent(
 bool EventHandler::OnMouseButtonReleasedEvent(
     EventSystem::MouseButtonReleasedEvent &aEvent) {
   auto &io = ImGui::GetIO();
-  io.MouseDown[aEvent.GetButton()] = false;
+  io.AddMouseButtonEvent(aEvent.GetButton(), false);
 
   return false;
 }
 
 bool EventHandler::OnMouseMovedEvent(EventSystem::MouseMovedEvent &aEvent) {
   auto &io = ImGui::GetIO();
-  io.MousePos = {aEvent.GetX(), aEvent.GetY()};
+  io.AddMousePosEvent(aEvent.GetX(), aEvent.GetX());
 
   return false;
 }
@@ -90,8 +90,7 @@ bool EventHandler::OnMouseMovedEvent(EventSystem::MouseMovedEvent &aEvent) {
 bool EventHandler::OnMouseScrolledEvent(
     EventSystem::MouseScrolledEvent &aEvent) {
   auto &io = ImGui::GetIO();
-  io.MouseWheelH += aEvent.GetXOffset();
-  io.MouseWheel += aEvent.GetYOffset();
+  io.AddMouseWheelEvent(aEvent.GetXOffset(), aEvent.GetYOffset());
 
   return false;
 }
