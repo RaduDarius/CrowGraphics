@@ -15,6 +15,7 @@ enum class EventType {
   // Key Events
   KeyPressed,
   KeyReleased,
+  KeyTyped,
 
   // Mouse Events
   MouseButtonPressed,
@@ -28,7 +29,7 @@ enum class EventType {
   virtual EventType GetType() const override { return GetStaticType(); }       \
   virtual const char *GetName() const override { return #type; }
 
-class Event {
+class KARA_API Event {
   friend class Dispatcher;
 
 public:

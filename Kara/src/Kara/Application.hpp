@@ -20,6 +20,10 @@ public:
 
   void Run();
 
+  static Application *Get() { return smInstance; }
+
+  CoreTypes::Size GetWindowSize() const { return mWindow->GetSize(); }
+
   void OnEvent(EventSystem::Event &aEvent);
 
   void Push(LayerSystem::Layer *aLayer);
@@ -29,9 +33,11 @@ private:
   bool OnClose(EventSystem::WindowClosedEvent &aEvent);
 
   std::unique_ptr<Core::Window> mWindow;
-  std::unique_ptr<LayerSystem::LayerStack> mLayerStack;
+  LayerSystem::LayerStack mLayerStack;
 
   bool mRunning{true};
+
+  static Application *smInstance;
 };
 
 Application *CreateApplication();

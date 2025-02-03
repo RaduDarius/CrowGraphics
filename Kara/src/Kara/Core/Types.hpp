@@ -26,14 +26,14 @@ struct Size {
   }
 };
 
-}  // namespace CoreTypes
+} // namespace CoreTypes
 
 struct Point {
   float x;
   float y;
 };
 
-inline std::ostream& operator<<(std::ostream& os, const Point& point) {
+inline std::ostream &operator<<(std::ostream &os, const Point &point) {
   return os << "(X: " << point.x << " Y: " << point.y << ")";
 }
-}  // namespace Kara
+} // namespace Kara

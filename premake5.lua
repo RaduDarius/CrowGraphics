@@ -28,7 +28,7 @@ project "Kara"
         "%{prj.name}/vendor/spdlog/include",
         "%{prj.name}/vendor/GLFW/include", 
         "%{prj.name}/vendor/GLAD/include", 
-        "%{prj.name}/vendor/imgui/include", 
+        "%{prj.name}/vendor/imgui", 
         "%{prj.name}/src" 
     }
     

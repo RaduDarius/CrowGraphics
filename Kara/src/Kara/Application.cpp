@@ -8,19 +8,28 @@
 #include "Kara/LayerSystem/Layer.hpp"
 #include "Kara/Log/Logger.hpp"
 
+#include <glad/glad.h>
+
 namespace Kara {
+Application *Application::smInstance = nullptr;
+
 Application::Application() {
   Log::Logger::Init();
 
+  KARA_CORE_ASSERT(smInstance, "Application should be a singleton !");
+  smInstance = this;
+
   mWindow = std::unique_ptr<Core::Window>(Core::Window::Create());
-  mLayerStack = std::make_unique<LayerSystem::LayerStack>();
 
   mWindow->SetEventCallback([&](EventSystem::Event &e) { return OnEvent(e); });
 }
 
 void Application::Run() {
   while (mRunning) {
-    for (auto layer : *mLayerStack) {
+    glClearColor(1, 0, 1, 1);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    for (auto layer : mLayerStack) {
       layer->OnUpdate();
     }
 
@@ -37,7 +46,7 @@ void Application::OnEvent(EventSystem::Event &aEvent) {
         return OnClose(e);
       });
 
-  for (auto it = mLayerStack->end(); it != mLayerStack->begin();) {
+  for (auto it = mLayerStack.end(); it != mLayerStack.begin();) {
     (*--it)->OnEvent(aEvent);
     if (aEvent.IsHandled()) {
       break;
@@ -46,10 +55,14 @@ void Application::OnEvent(EventSystem::Event &aEvent) {
 }
 
 void Application::Push(LayerSystem::Layer *aLayer) {
-  mLayerStack->Push(aLayer);
+  mLayerStack.Push(aLayer);
+  aLayer->OnAttach();
 }
 
-void Application::Pop(LayerSystem::Layer *aLayer) { mLayerStack->Pop(aLayer); }
+void Application::Pop(LayerSystem::Layer *aLayer) {
+  mLayerStack.Pop(aLayer);
+  aLayer->OnDetach();
+}
 
 bool Application::OnClose(EventSystem::WindowClosedEvent &aEvent) {
   mRunning = false;

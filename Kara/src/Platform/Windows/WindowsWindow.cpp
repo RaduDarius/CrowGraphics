@@ -83,9 +83,9 @@ void WindowsWindow::SetupEvents() {
 
         EventSystem::WindowResizedEvent event{static_cast<float>(aWidth),
                                               static_cast<float>(aHeight)};
-        data.mEventCallback(event);
         data.mSize.mWidth = aWidth;
         data.mSize.mHeight = aHeight;
+        data.mEventCallback(event);
       });
 
   glfwSetWindowCloseCallback(mWindow, [](GLFWwindow *aWindow) {
@@ -120,6 +120,15 @@ void WindowsWindow::SetupEvents() {
     default:
       break;
     }
+  });
+
+  glfwSetCharCallback(mWindow, [](GLFWwindow *aWindow, unsigned int aKeyCode) {
+    auto data =
+        *reinterpret_cast<WindowData *>(glfwGetWindowUserPointer(aWindow));
+
+    EventSystem::KeyTypedEvent e{
+        static_cast<EventSystem::KeyEvent::KeyCode>(aKeyCode)};
+    data.mEventCallback(e);
   });
 
   glfwSetMouseButtonCallback(

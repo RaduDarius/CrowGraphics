@@ -40,7 +40,7 @@ class MouseScrolledEvent : public Event {
       : mOffset{aXOffset, aYOffset} {}
   MouseScrolledEvent(const Offset& aOffset) : mOffset{aOffset} {}
 
-  inline Offset GetPosition() { return mOffset; }
+  inline Offset GetOffset() { return mOffset; }
   inline float GetXOffset() { return mOffset.x; }
   inline float GetYOffset() { return mOffset.y; }
 
