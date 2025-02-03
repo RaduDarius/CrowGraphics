@@ -8,6 +8,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include other submodules 
 include "Kara/vendor/GLFW"
 include "Kara/vendor/GLAD"
+include "Kara/vendor/imgui"
 
 -- Project: Kara
 project "Kara"
@@ -27,12 +28,14 @@ project "Kara"
         "%{prj.name}/vendor/spdlog/include",
         "%{prj.name}/vendor/GLFW/include", 
         "%{prj.name}/vendor/GLAD/include", 
+        "%{prj.name}/vendor/imgui/include", 
         "%{prj.name}/src" 
     }
     
     links { 
         "GLFW", 
         "GLAD", 
+        "imgui",
         "opengl32.lib" 
      }
 
@@ -41,7 +44,7 @@ project "Kara"
         staticruntime "On"
         systemversion "latest"
 
-        defines { "KARA_PLATFORM_WINDOWS", "KARA_BUILD_DLL" }
+        defines { "KARA_PLATFORM_WINDOWS", "KARA_BUILD_DLL", "GLFW_INCLUDE_NONE" }
 
         postbuildcommands { ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox") }
 

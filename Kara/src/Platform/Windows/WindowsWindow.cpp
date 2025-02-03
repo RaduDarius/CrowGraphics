@@ -7,6 +7,9 @@
 #include "Kara/EventSystem/WindowEvent.hpp"
 #include "Kara/Log/Logger.hpp"
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 namespace Kara {
 namespace Core {
 namespace Platform {
@@ -20,7 +23,7 @@ WindowsWindow::WindowsWindow(const WindowProps &aProps)
                  mData.mSize.ToString());
 
   if (!sGLFWInitialized) {
-    auto success = glfwInit();
+    const auto success = glfwInit();
     KARA_CORE_ASSERT(success, "Can not initialize GLFW !");
 
     glfwSetErrorCallback([](int aError, const char *aMessage) {
@@ -33,6 +36,11 @@ WindowsWindow::WindowsWindow(const WindowProps &aProps)
   mWindow = glfwCreateWindow(mData.mSize.mWidth, mData.mSize.mHeight,
                              mData.mTitle.c_str(), nullptr, nullptr);
   glfwMakeContextCurrent(mWindow);
+
+  const auto success =
+      gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
+  KARA_CORE_ASSERT(success, "Can not initialize GLAD !");
+
   glfwSetWindowUserPointer(mWindow, reinterpret_cast<void *>(&mData));
   SetVSync(true);
 

@@ -7,3 +7,6 @@
 [submodule "Kara/vendor/GLFW"]
 	path = Kara/vendor/GLFW
 	url = https://github.com/RaduDarius/glfw.git
+[submodule "Kara/vendor/imgui"]
+	path = Kara/vendor/imgui
+	url = https://github.com/RaduDarius/imgui.git

@@ -1,8 +1,9 @@
 #pragma once
 
-#include "GLFW/glfw3.h"
 #include "Kara/Core/Types.hpp"
 #include "Kara/Core/Window.hpp"
+
+struct GLFWwindow;
 
 namespace Kara {
 namespace Core {
