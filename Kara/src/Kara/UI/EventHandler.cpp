@@ -82,7 +82,7 @@ bool EventHandler::OnMouseButtonReleasedEvent(
 
 bool EventHandler::OnMouseMovedEvent(EventSystem::MouseMovedEvent &aEvent) {
   auto &io = ImGui::GetIO();
-  io.AddMousePosEvent(aEvent.GetX(), aEvent.GetX());
+  io.AddMousePosEvent(aEvent.GetX(), aEvent.GetY());
 
   return false;
 }
