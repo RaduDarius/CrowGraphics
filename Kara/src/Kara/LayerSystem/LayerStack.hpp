@@ -17,11 +17,17 @@ public:
   void Push(Layer *aLayer);
   void Pop(Layer *aLayer);
 
-  Container::iterator begin() noexcept { return mLayers.begin(); }
-  Container::iterator end() noexcept { return mLayers.end(); }
+  //! @brief Used to insert an overlay to the layer stack. Caller will lose
+  //! ownership over the [aLayer] parameter
+  void PushOverlay(Layer *aLayer);
+  void PopOverlay(Layer *aLayer);
+
+  void map(const std::function<void(Layer *)> &aFunc);
+  void mapi(const std::function<bool(Layer *)> &aFunc);
 
 private:
   Container mLayers;
+  Container mOverlays;
 };
 } // namespace LayerSystem
 } // namespace Kara

@@ -29,16 +29,14 @@ void Application::Run() {
     glClearColor(1, 0, 1, 1);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (auto layer : mLayerStack) {
-      layer->OnUpdate();
-    }
+    mLayerStack.map([](LayerSystem::Layer *aLayer) { aLayer->OnUpdate(); });
 
     mWindow->OnUpdate();
   }
 }
 
 void Application::OnEvent(EventSystem::Event &aEvent) {
-  KARA_CORE_TRACE("{0}", aEvent.ToString());
+  // KARA_CORE_TRACE("{0}", aEvent.ToString());
 
   EventSystem::Dispatcher dispatcher{aEvent};
   dispatcher.Dispatch<EventSystem::WindowClosedEvent>(
@@ -46,12 +44,12 @@ void Application::OnEvent(EventSystem::Event &aEvent) {
         return OnClose(e);
       });
 
-  for (auto it = mLayerStack.end(); it != mLayerStack.begin();) {
-    (*--it)->OnEvent(aEvent);
+  mLayerStack.mapi([&](LayerSystem::Layer *aLayer) {
+    aLayer->OnEvent(aEvent);
     if (aEvent.IsHandled()) {
-      break;
+      return true;
     }
-  }
+  });
 }
 
 void Application::Push(LayerSystem::Layer *aLayer) {
