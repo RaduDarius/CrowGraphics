@@ -2,6 +2,7 @@
 
 #include "Kara/Core/Core.hpp"
 #include "Kara/EventSystem/Event.hpp"
+#include "Kara/EventSystem/KeyCode.hpp"
 
 namespace Kara {
 namespace EventSystem {
@@ -11,8 +12,6 @@ namespace EventSystem {
 //! Base class for KEY related events that need to store a KEYCODE.
 class KeyEvent : public Event {
  public:
-  using KeyCode = int;
-
   inline KeyCode GetKeyCode() const { return mKeyCode; }
 
  protected:

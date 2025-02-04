@@ -3,6 +3,8 @@ workspace "Kara"
     architecture "x64"
     configurations { "Debug", "Release" }
 
+    startproject "Sandbox"
+
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include other submodules 
@@ -46,7 +48,7 @@ project "Kara"
 
         defines { "KARA_PLATFORM_WINDOWS", "KARA_BUILD_DLL", "GLFW_INCLUDE_NONE" }
 
-        postbuildcommands { ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox") }
+        postbuildcommands { ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"") }
 
         buildoptions { "/utf-8" }
 
@@ -86,10 +88,10 @@ project "Sandbox"
     
     filter "configurations:Debug"
         defines "KARA_DEBUG"
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "KARA_RELEASE"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"

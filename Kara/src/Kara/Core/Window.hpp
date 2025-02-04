@@ -25,6 +25,8 @@ class KARA_API Window {
   virtual CoreTypes::Size GetSize() const = 0;
   virtual uint32 GetWidth() const = 0;
   virtual uint32 GetHeight() const = 0;
+  virtual void *GetNativeWindow() const = 0;
+
   virtual bool IsVSync() const = 0;
 
   virtual void SetEventCallback(const EventCallback&) = 0;

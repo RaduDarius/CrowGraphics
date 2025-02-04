@@ -2,6 +2,7 @@
 
 #include "WindowsWindow.hpp"
 
+#include "Kara/EventSystem/Convertors.hpp"
 #include "Kara/EventSystem/KeyEvent.hpp"
 #include "Kara/EventSystem/MouseEvent.hpp"
 #include "Kara/EventSystem/WindowEvent.hpp"
@@ -60,6 +61,10 @@ uint32 WindowsWindow::GetWidth() const { return mData.mSize.mWidth; }
 
 uint32 WindowsWindow::GetHeight() const { return mData.mSize.mHeight; }
 
+void *WindowsWindow::GetNativeWindow() const {
+  return static_cast<void *>(mWindow);
+}
+
 bool WindowsWindow::IsVSync() const { return mData.mVSync; }
 
 void WindowsWindow::SetEventCallback(const EventCallback &aCallback) {
@@ -103,17 +108,17 @@ void WindowsWindow::SetupEvents() {
 
     switch (aAction) {
     case GLFW_PRESS: {
-      EventSystem::KeyPressedEvent e{aKey, 0};
+      EventSystem::KeyPressedEvent e{EventSystem::ConvertToKeyCode(aKey), 0};
       data.mEventCallback(e);
     } break;
 
     case GLFW_RELEASE: {
-      EventSystem::KeyReleasedEvent e{aKey};
+      EventSystem::KeyReleasedEvent e{EventSystem::ConvertToKeyCode(aKey)};
       data.mEventCallback(e);
     } break;
 
     case GLFW_REPEAT: {
-      EventSystem::KeyPressedEvent e{aKey, 1};
+      EventSystem::KeyPressedEvent e{EventSystem::ConvertToKeyCode(aKey), 1};
       data.mEventCallback(e);
     } break;
 
@@ -126,8 +131,7 @@ void WindowsWindow::SetupEvents() {
     auto data =
         *reinterpret_cast<WindowData *>(glfwGetWindowUserPointer(aWindow));
 
-    EventSystem::KeyTypedEvent e{
-        static_cast<EventSystem::KeyEvent::KeyCode>(aKeyCode)};
+    EventSystem::KeyTypedEvent e{EventSystem::ConvertToKeyCode(aKeyCode)};
     data.mEventCallback(e);
   });
 
@@ -138,12 +142,14 @@ void WindowsWindow::SetupEvents() {
 
         switch (aAction) {
         case GLFW_PRESS: {
-          EventSystem::MouseButtonPressedEvent e{aButton};
+          EventSystem::MouseButtonPressedEvent e{
+              EventSystem::ConvertToMouseButtonId(aButton)};
           data.mEventCallback(e);
         } break;
 
         case GLFW_RELEASE: {
-          EventSystem::MouseButtonReleasedEvent e{aButton};
+          EventSystem::MouseButtonReleasedEvent e{
+              EventSystem::ConvertToMouseButtonId(aButton)};
           data.mEventCallback(e);
         } break;
 
