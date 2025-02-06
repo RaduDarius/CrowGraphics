@@ -16,22 +16,31 @@ LayerStack::~LayerStack() {
   }
 }
 
-void LayerStack::Push(Layer *aLayer) { mLayers.emplace_back(aLayer); }
+void LayerStack::Push(Layer *aLayer) {
+  mLayers.emplace_back(aLayer);
+  aLayer->OnAttach();
+}
 
 void LayerStack::Pop(Layer *aLayer) {
   const auto it = std::find(mLayers.begin(), mLayers.end(), aLayer);
   if (it != mLayers.end()) {
     mLayers.erase(it);
   }
+  aLayer->OnDetach();
 }
 
-void LayerStack::PushOverlay(Layer *aLayer) { mOverlays.emplace_back(aLayer); }
+void LayerStack::PushOverlay(Layer *aLayer) {
+  mOverlays.emplace_back(aLayer);
+  aLayer->OnAttach();
+}
 
 void LayerStack::PopOverlay(Layer *aLayer) {
   const auto it = std::find(mOverlays.begin(), mOverlays.end(), aLayer);
   if (it != mOverlays.end()) {
     mOverlays.erase(it);
   }
+
+  aLayer->OnDetach();
 }
 
 void LayerStack::map(const std::function<void(Layer *)> &aFunc) {

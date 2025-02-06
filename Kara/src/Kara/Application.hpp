@@ -3,6 +3,7 @@
 #include "Kara/Core/Core.hpp"
 #include "Kara/Core/Window.hpp"
 #include "Kara/LayerSystem/LayerStack.hpp"
+#include "Kara/UI/UILayer.hpp"
 
 namespace Kara {
 namespace EventSystem {
@@ -34,6 +35,8 @@ private:
   bool OnClose(EventSystem::WindowClosedEvent &aEvent);
 
   std::unique_ptr<Core::Window> mWindow;
+  UI::UILayer *mUILayer{nullptr};
+
   LayerSystem::LayerStack mLayerStack;
 
   bool mRunning{true};

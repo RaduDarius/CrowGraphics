@@ -21,6 +21,9 @@ Application::Application() {
 
   mWindow = std::unique_ptr<Core::Window>(Core::Window::Create());
 
+  mUILayer = new UI::UILayer();
+  mLayerStack.PushOverlay(mUILayer);
+
   mWindow->SetEventCallback([&](EventSystem::Event &e) { return OnEvent(e); });
 }
 
@@ -30,6 +33,10 @@ void Application::Run() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     mLayerStack.map([](LayerSystem::Layer *aLayer) { aLayer->OnUpdate(); });
+
+    mUILayer->Begin();
+    mLayerStack.map([](LayerSystem::Layer *aLayer) { aLayer->OnRender(); });
+    mUILayer->End();
 
     mWindow->OnUpdate();
   }
@@ -52,15 +59,9 @@ void Application::OnEvent(EventSystem::Event &aEvent) {
   });
 }
 
-void Application::Push(LayerSystem::Layer *aLayer) {
-  mLayerStack.Push(aLayer);
-  aLayer->OnAttach();
-}
+void Application::Push(LayerSystem::Layer *aLayer) { mLayerStack.Push(aLayer); }
 
-void Application::Pop(LayerSystem::Layer *aLayer) {
-  mLayerStack.Pop(aLayer);
-  aLayer->OnDetach();
-}
+void Application::Pop(LayerSystem::Layer *aLayer) { mLayerStack.Pop(aLayer); }
 
 bool Application::OnClose(EventSystem::WindowClosedEvent &aEvent) {
   mRunning = false;

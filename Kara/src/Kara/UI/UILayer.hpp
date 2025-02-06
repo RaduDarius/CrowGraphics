@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Kara/Core/Core.hpp"
-#include "Kara/EventSystem/Event.hpp"
 #include "Kara/LayerSystem/Layer.hpp"
 #include "Kara/UI/EventHandler.hpp"
 
@@ -12,17 +11,14 @@ public:
   UILayer();
   ~UILayer();
 
-  void OnAttach();
-  void OnDetach();
-  void OnUpdate();
-  void OnEvent(EventSystem::Event &aEvent);
+  virtual void OnAttach() override;
+  virtual void OnDetach() override;
+  virtual void OnRender() override;
+
+  void Begin();
+  void End();
 
 private:
-  //! @brief Override the mTime with the (currentTime) receved from the glfw
-  //! module
-  //! @return The delta time which will be mTime - currentTime
-  float GetDeltaTime();
-
   EventHandler mEventHandler;
 
   float mTime{0.0f};

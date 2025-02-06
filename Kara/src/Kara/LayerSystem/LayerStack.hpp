@@ -22,7 +22,15 @@ public:
   void PushOverlay(Layer *aLayer);
   void PopOverlay(Layer *aLayer);
 
+  //! @brief Calls a function on every layer and overlay from the LayerStack,
+  //! starting with the layers.
+  //! @param aFunc should receive a Layer and return nothing
   void map(const std::function<void(Layer *)> &aFunc);
+
+  //! @brief Calls a function on every layer and overlay but in invers order,
+  //! starting with the overlays.
+  //! @param aFunc should receive a layer and return a bool which will be used
+  //! in case the caller does not want to call the func on all layers/overlays.
   void mapi(const std::function<bool(Layer *)> &aFunc);
 
 private:
