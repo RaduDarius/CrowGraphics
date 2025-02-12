@@ -5,23 +5,21 @@
 namespace Kara {
 namespace EventSystem {
 class Dispatcher {
-  template <typename T>
-  using EventFunc = std::function<bool(T&)>;
+  template <typename T> using EventFunc = std::function<bool(T &)>;
 
- public:
-  Dispatcher(Event& aEvent) : mEvent{aEvent} {}
+public:
+  Dispatcher(Event &aEvent) : mEvent{aEvent} {}
 
-  template <typename T>
-  bool Dispatch(const EventFunc<T>& aCallback) {
+  template <typename T> bool Dispatch(const EventFunc<T> &aCallback) {
     if (mEvent.GetType() == T::GetStaticType()) {
-      mEvent.mIsHandled = aCallback(*reinterpret_cast<T*>(&mEvent));
+      mEvent.mIsHandled = aCallback(*reinterpret_cast<T *>(&mEvent));
       return true;
     }
     return false;
   }
 
- private:
-  Event& mEvent;
+private:
+  Event &mEvent;
 };
-}  // namespace EventSystem
-}  // namespace Kara
+} // namespace EventSystem
+} // namespace Kara

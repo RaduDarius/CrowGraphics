@@ -10,4 +10,4 @@
 #endif
 #else
 #error Only windows support available !
-#endif  // KR_PLATFORM_WINDOWS
+#endif // KR_PLATFORM_WINDOWS

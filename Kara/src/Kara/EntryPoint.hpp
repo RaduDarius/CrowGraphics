@@ -2,7 +2,7 @@
 
 #ifdef KARA_PLATFORM_WINDOWS
 
-extern Kara::Application* Kara::CreateApplication();
+extern Kara::Application *Kara::CreateApplication();
 
-int main(int argc, char** argv) { Kara::CreateApplication()->Run(); }
+int main(int argc, char **argv) { Kara::CreateApplication()->Run(); }
 #endif

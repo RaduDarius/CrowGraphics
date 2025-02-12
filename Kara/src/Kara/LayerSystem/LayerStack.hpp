@@ -6,7 +6,7 @@ namespace Kara {
 namespace LayerSystem {
 class Layer;
 
-class KARA_API LayerStack {
+class LayerStack {
   using Container = std::vector<Layer *>;
 
 public:

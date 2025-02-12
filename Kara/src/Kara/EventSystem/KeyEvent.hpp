@@ -11,10 +11,10 @@ namespace EventSystem {
 
 //! Base class for KEY related events that need to store a KEYCODE.
 class KeyEvent : public Event {
- public:
+public:
   inline KeyCode GetKeyCode() const { return mKeyCode; }
 
- protected:
+protected:
   KeyEvent(const KeyCode aKeyCode) : mKeyCode{aKeyCode} {}
 
   virtual inline std::string ToString() const override {
@@ -23,12 +23,12 @@ class KeyEvent : public Event {
     return ss.str();
   }
 
- private:
+private:
   KeyCode mKeyCode;
 };
 
 class KeyPressedEvent : public KeyEvent {
- public:
+public:
   KeyPressedEvent(const KeyCode aKeyCode, const uint32 aRepeatCount)
       : KeyEvent{aKeyCode}, mRepeatCount{aRepeatCount} {}
 
@@ -36,12 +36,12 @@ class KeyPressedEvent : public KeyEvent {
 
   EVENT_TYPE(KeyPressed);
 
- private:
+private:
   const uint32 mRepeatCount;
 };
 
 class KeyReleasedEvent : public KeyEvent {
- public:
+public:
   KeyReleasedEvent(const KeyCode aKeyCode) : KeyEvent{aKeyCode} {}
 
   EVENT_TYPE(KeyReleased);
@@ -54,5 +54,5 @@ public:
   EVENT_TYPE(KeyTyped);
 };
 
-}  // namespace EventSystem
-}  // namespace Kara
+} // namespace EventSystem
+} // namespace Kara

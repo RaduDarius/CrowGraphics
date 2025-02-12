@@ -29,7 +29,7 @@ enum class EventType {
   virtual EventType GetType() const override { return GetStaticType(); }       \
   virtual const char *GetName() const override { return #type; }
 
-class KARA_API Event {
+class Event {
   friend class Dispatcher;
 
 public:

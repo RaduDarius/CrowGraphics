@@ -15,7 +15,7 @@ namespace LayerSystem {
 class Layer;
 } // namespace LayerSystem
 
-class KARA_API Application {
+class Application {
 public:
   Application();
 

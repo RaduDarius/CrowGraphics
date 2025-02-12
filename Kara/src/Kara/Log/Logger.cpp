@@ -18,5 +18,5 @@ void Logger::Init() {
 
   KARA_CORE_INFO("Logger initialized successfully !");
 }
-}  // namespace Log
-}  // namespace Kara
+} // namespace Log
+} // namespace Kara

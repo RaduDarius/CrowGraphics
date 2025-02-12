@@ -2,11 +2,10 @@
 
 #include "Kara/Core/Core.hpp"
 #include "Kara/LayerSystem/Layer.hpp"
-#include "Kara/UI/EventHandler.hpp"
 
 namespace Kara {
 namespace UI {
-class KARA_API UILayer : public LayerSystem::Layer {
+class UILayer : public LayerSystem::Layer {
 public:
   UILayer();
   ~UILayer();
@@ -19,8 +18,6 @@ public:
   void End();
 
 private:
-  EventHandler mEventHandler;
-
   float mTime{0.0f};
 };
 } // namespace UI

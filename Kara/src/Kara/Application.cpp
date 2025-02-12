@@ -56,6 +56,7 @@ void Application::OnEvent(EventSystem::Event &aEvent) {
     if (aEvent.IsHandled()) {
       return true;
     }
+    return false;
   });
 }
 

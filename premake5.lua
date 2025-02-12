@@ -15,8 +15,10 @@ include "Kara/vendor/imgui"
 -- Project: Kara
 project "Kara"
     location "Kara"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
+    cppdialect "C++17"
+    staticruntime "On"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-temp/" .. outputdir .. "/%{prj.name}")
@@ -42,24 +44,20 @@ project "Kara"
      }
 
     filter "system:windows"
-        cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
-        defines { "KARA_PLATFORM_WINDOWS", "KARA_BUILD_DLL", "GLFW_INCLUDE_NONE" }
-
-        postbuildcommands { ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"") }
+        defines { "KARA_PLATFORM_WINDOWS", "KARA_BUILD_DLL", "GLFW_INCLUDE_NONE", "_CRT_SECURE_NO_WARNINGS" }
 
         buildoptions { "/utf-8" }
 
     filter "configurations:Debug"
         defines {"KARA_DEBUG", "KARA_ENABLE_ASSERTS"}
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "KARA_RELEASE"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
 -- Project: Sandbox
@@ -67,6 +65,8 @@ project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "C++"
+    cppdialect "C++17"
+    staticruntime "On"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-temp/" .. outputdir .. "/%{prj.name}")
@@ -78,11 +78,9 @@ project "Sandbox"
     links { "Kara" }
 
     filter "system:windows"
-        cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
-        defines "KARA_PLATFORM_WINDOWS"
+        defines { "KARA_PLATFORM_WINDOWS", "_CRT_SECURE_NO_WARNINGS" }
 
         buildoptions { "/utf-8" }
     

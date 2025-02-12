@@ -7,12 +7,12 @@
 namespace Kara {
 namespace Core {
 namespace InputManager {
-std::pair<float, float> KARA_API GetMousePos();
-inline float KARA_API GetMouseX() { return GetMousePos().first; }
-inline float KARA_API GetMouseY() { return GetMousePos().second; }
+std::pair<float, float> GetMousePos();
+inline float GetMouseX() { return GetMousePos().first; }
+inline float GetMouseY() { return GetMousePos().second; }
 
-bool KARA_API IsKeyPressed(const EventSystem::KeyCode aKeyCode);
-bool KARA_API IsMouseButtonPressed(const EventSystem::MouseButtonId aButtonId);
+bool IsKeyPressed(const EventSystem::KeyCode aKeyCode);
+bool IsMouseButtonPressed(const EventSystem::MouseButtonId aButtonId);
 } // namespace InputManager
 } // namespace Core
 } // namespace Kara

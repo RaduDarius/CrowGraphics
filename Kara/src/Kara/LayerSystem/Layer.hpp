@@ -5,7 +5,7 @@
 
 namespace Kara {
 namespace LayerSystem {
-class KARA_API Layer {
+class Layer {
 public:
   Layer() = default;
   Layer(const std::string &aName) : mName{aName} {}

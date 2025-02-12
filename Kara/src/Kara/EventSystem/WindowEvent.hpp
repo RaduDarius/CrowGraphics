@@ -9,12 +9,12 @@ namespace EventSystem {
 //! WindowClose, WindowResize, WindowMoved.
 
 class WindowResizedEvent : public Event {
- public:
+public:
   using Size = Point;
 
   WindowResizedEvent(const float aWidth, const float aHeight)
       : mSize{aWidth, aHeight} {}
-  WindowResizedEvent(const Size& aSize) : mSize{aSize} {}
+  WindowResizedEvent(const Size &aSize) : mSize{aSize} {}
 
   inline Size GetSize() { return mSize; }
   inline float GetWidth() { return mSize.x; }
@@ -28,16 +28,16 @@ class WindowResizedEvent : public Event {
 
   EVENT_TYPE(WindowResized);
 
- private:
+private:
   Size mSize;
 };
 
 class WindowMovedEvent : public Event {
- public:
+public:
   using Position = Point;
 
   WindowMovedEvent(const float aX, const float aY) : mPosition{aX, aY} {}
-  WindowMovedEvent(const Position& aPosition) : mPosition{aPosition} {}
+  WindowMovedEvent(const Position &aPosition) : mPosition{aPosition} {}
 
   inline Position GetPosition() { return mPosition; }
   inline float GetXOffset() { return mPosition.x; }
@@ -51,16 +51,16 @@ class WindowMovedEvent : public Event {
 
   EVENT_TYPE(WindowMoved);
 
- private:
+private:
   Position mPosition;
 };
 
 class WindowClosedEvent : public Event {
- public:
+public:
   virtual inline std::string ToString() const override { return GetName(); }
 
   EVENT_TYPE(WindowClosed);
 };
 
-}  // namespace EventSystem
-}  // namespace Kara
+} // namespace EventSystem
+} // namespace Kara

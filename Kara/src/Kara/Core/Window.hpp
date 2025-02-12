@@ -5,7 +5,7 @@
 
 namespace Kara {
 namespace Core {
-struct KARA_API WindowProps {
+struct WindowProps {
   WindowProps() = default;
   WindowProps(const std::string aTitle, const CoreTypes::Size aSize)
       : mTitle{aTitle}, mSize{aSize} {}
@@ -14,9 +14,9 @@ struct KARA_API WindowProps {
   CoreTypes::Size mSize{1280, 720};
 };
 
-class KARA_API Window {
- public:
-  using EventCallback = std::function<void(EventSystem::Event&)>;
+class Window {
+public:
+  using EventCallback = std::function<void(EventSystem::Event &)>;
 
   virtual ~Window() = default;
 
@@ -29,11 +29,11 @@ class KARA_API Window {
 
   virtual bool IsVSync() const = 0;
 
-  virtual void SetEventCallback(const EventCallback&) = 0;
+  virtual void SetEventCallback(const EventCallback &) = 0;
   virtual void SetVSync(const bool) = 0;
 
-  static Window* Create(const WindowProps& aProps = WindowProps());
+  static Window *Create(const WindowProps &aProps = WindowProps());
 };
 
-}  // namespace Core
-}  // namespace Kara
+} // namespace Core
+} // namespace Kara

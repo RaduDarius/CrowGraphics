@@ -8,7 +8,7 @@ struct GLFWwindow;
 namespace Kara {
 namespace Core {
 namespace Platform {
-class KARA_API WindowsWindow : public Window {
+class WindowsWindow : public Window {
 public:
   WindowsWindow(const WindowProps &aProps);
   ~WindowsWindow() override;

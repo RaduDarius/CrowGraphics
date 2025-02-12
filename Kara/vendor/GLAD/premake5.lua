@@ -3,6 +3,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 project "GLAD"
     kind "StaticLib"
     language "C"
+    staticruntime "On"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-temp/" .. outputdir .. "/%{prj.name}")
@@ -17,7 +18,11 @@ project "GLAD"
 
     filter "system:windows"
         systemversion "latest"
-        staticruntime "On"
 
-    filter { "system:windows", "configurations:Release" }
-        buildoptions "/MT"
+    filter { "configurations:Debug" }
+        runtime "Debug"
+        symbols "On"
+
+    filter { "configurations:Release" }
+        runtime "Release"
+        optimize "On"
