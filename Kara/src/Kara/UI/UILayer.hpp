@@ -10,9 +10,9 @@ public:
   UILayer();
   ~UILayer();
 
-  virtual void OnAttach() override;
-  virtual void OnDetach() override;
-  virtual void OnRender() override;
+  void OnAttach() override;
+  void OnDetach() override;
+  void OnRender() override;
 
   void Begin();
   void End();

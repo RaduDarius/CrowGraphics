@@ -13,17 +13,17 @@ public:
   WindowsWindow(const WindowProps &aProps);
   ~WindowsWindow() override;
 
-  virtual void OnUpdate() override;
+  void OnUpdate() override;
 
-  virtual CoreTypes::Size GetSize() const override;
-  virtual uint32 GetWidth() const override;
-  virtual uint32 GetHeight() const override;
-  virtual void *GetNativeWindow() const override;
+  CoreTypes::Size GetSize() const override;
+  uint32 GetWidth() const override;
+  uint32 GetHeight() const override;
+  void *GetNativeWindow() const override;
 
-  virtual bool IsVSync() const override;
+  bool IsVSync() const override;
 
-  virtual void SetEventCallback(const EventCallback &) override;
-  virtual void SetVSync(const bool) override;
+  void SetEventCallback(const EventCallback &) override;
+  void SetVSync(const bool) override;
 
 private:
   void SetupEvents();

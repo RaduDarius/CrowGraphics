@@ -8,7 +8,8 @@
 #include "Kara/EventSystem/WindowEvent.hpp"
 #include "Kara/Log/Logger.hpp"
 
-#include <glad/glad.h>
+#include "Platform/Windows/OpenGlContext.hpp"
+
 #include <GLFW/glfw3.h>
 
 namespace Kara {
@@ -36,11 +37,7 @@ WindowsWindow::WindowsWindow(const WindowProps &aProps)
 
   mWindow = glfwCreateWindow(mData.mSize.mWidth, mData.mSize.mHeight,
                              mData.mTitle.c_str(), nullptr, nullptr);
-  glfwMakeContextCurrent(mWindow);
-
-  const auto success =
-      gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
-  KARA_CORE_ASSERT(success, "Can not initialize GLAD !");
+  SetContext(new OpenGlContext(mWindow));
 
   glfwSetWindowUserPointer(mWindow, reinterpret_cast<void *>(&mData));
   SetVSync(true);
@@ -52,7 +49,7 @@ WindowsWindow::~WindowsWindow() { glfwDestroyWindow(mWindow); }
 
 void WindowsWindow::OnUpdate() {
   glfwPollEvents();
-  glfwSwapBuffers(mWindow);
+  ContextSwapBuffers();
 }
 
 CoreTypes::Size WindowsWindow::GetSize() const { return mData.mSize; }
@@ -77,7 +74,7 @@ void WindowsWindow::SetVSync(const bool aEnable) {
   }
 
   mData.mVSync = aEnable;
-  glfwSwapInterval(static_cast<int>(mData.mVSync));
+  ContextSwapInterval(mData.mVSync);
 }
 
 void WindowsWindow::SetupEvents() {

@@ -21,7 +21,7 @@ public:
   inline float GetX() { return mPosition.x; }
   inline float GetY() { return mPosition.y; }
 
-  virtual inline std::string ToString() const override {
+  inline std::string ToString() const override {
     std::stringstream ss;
     ss << GetName() << ": " << mPosition << '\n';
     return ss.str();
@@ -45,7 +45,7 @@ public:
   inline float GetXOffset() { return mOffset.x; }
   inline float GetYOffset() { return mOffset.y; }
 
-  virtual inline std::string ToString() const override {
+  inline std::string ToString() const override {
     std::stringstream ss;
     ss << GetName() << ": " << mOffset << '\n';
     return ss.str();
@@ -62,7 +62,7 @@ class MouseButtonEvent : public Event {
 public:
   inline MouseButtonId GetButton() const { return mButton; }
 
-  virtual inline std::string ToString() const override {
+  inline std::string ToString() const override {
     std::stringstream ss;
     ss << GetName() << ": " << mButton << '\n';
     return ss.str();

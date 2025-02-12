@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Kara/Core/Context.hpp"
 #include "Kara/Core/Types.hpp"
 #include "Kara/EventSystem/Event.hpp"
 
@@ -18,7 +19,7 @@ class Window {
 public:
   using EventCallback = std::function<void(EventSystem::Event &)>;
 
-  virtual ~Window() = default;
+  virtual ~Window();
 
   virtual void OnUpdate() = 0;
 
@@ -33,6 +34,19 @@ public:
   virtual void SetVSync(const bool) = 0;
 
   static Window *Create(const WindowProps &aProps = WindowProps());
+
+protected:
+  //! @brief The caller will lose ownership of [aContext]
+  void SetContext(Context *aContext);
+
+  //! Context related APIs
+  inline void ContextSwapBuffers() { mContext->SwapBuffers(); }
+  inline void ContextSwapInterval(const bool aInterval) {
+    mContext->SwapInterval(aInterval);
+  }
+
+private:
+  Context *mContext{nullptr};
 };
 
 } // namespace Core

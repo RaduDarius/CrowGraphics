@@ -17,7 +17,7 @@ public:
 protected:
   KeyEvent(const KeyCode aKeyCode) : mKeyCode{aKeyCode} {}
 
-  virtual inline std::string ToString() const override {
+  inline std::string ToString() const override {
     std::stringstream ss;
     ss << GetName() << ": " << mKeyCode << '\n';
     return ss.str();

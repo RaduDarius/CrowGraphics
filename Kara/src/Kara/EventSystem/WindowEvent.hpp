@@ -20,7 +20,7 @@ public:
   inline float GetWidth() { return mSize.x; }
   inline float GetHeight() { return mSize.y; }
 
-  virtual inline std::string ToString() const override {
+  inline std::string ToString() const override {
     std::stringstream ss;
     ss << GetName() << ": " << mSize << '\n';
     return ss.str();
@@ -43,7 +43,7 @@ public:
   inline float GetXOffset() { return mPosition.x; }
   inline float GetYOffset() { return mPosition.y; }
 
-  virtual inline std::string ToString() const override {
+  inline std::string ToString() const override {
     std::stringstream ss;
     ss << GetName() << ": " << mPosition << '\n';
     return ss.str();
@@ -57,7 +57,7 @@ private:
 
 class WindowClosedEvent : public Event {
 public:
-  virtual inline std::string ToString() const override { return GetName(); }
+  inline std::string ToString() const override { return GetName(); }
 
   EVENT_TYPE(WindowClosed);
 };

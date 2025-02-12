@@ -26,8 +26,8 @@ enum class EventType {
 
 #define EVENT_TYPE(type)                                                       \
   static EventType GetStaticType() { return EventType::##type; }               \
-  virtual EventType GetType() const override { return GetStaticType(); }       \
-  virtual const char *GetName() const override { return #type; }
+  EventType GetType() const override { return GetStaticType(); }               \
+  const char *GetName() const override { return #type; }
 
 class Event {
   friend class Dispatcher;
