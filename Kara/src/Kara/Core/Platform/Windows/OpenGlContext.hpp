@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Kara/Core/Context.hpp"
+#include "Kara/Core/Renderer/Context.hpp"
 
 struct GLFWwindow;
 
 namespace Kara {
 namespace Core {
 namespace Platform {
-class OpenGlContext : public Context {
+class OpenGlContext : public Renderer::Context {
 public:
   OpenGlContext(GLFWwindow *aWindowHandle);
 

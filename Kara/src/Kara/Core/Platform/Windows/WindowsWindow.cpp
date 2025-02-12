@@ -2,13 +2,12 @@
 
 #include "WindowsWindow.hpp"
 
+#include "Kara/Core/Platform/Windows/OpenGlContext.hpp"
 #include "Kara/EventSystem/Convertors.hpp"
 #include "Kara/EventSystem/KeyEvent.hpp"
 #include "Kara/EventSystem/MouseEvent.hpp"
 #include "Kara/EventSystem/WindowEvent.hpp"
 #include "Kara/Log/Logger.hpp"
-
-#include "Platform/Windows/OpenGlContext.hpp"
 
 #include <GLFW/glfw3.h>
 

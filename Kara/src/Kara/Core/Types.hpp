@@ -1,6 +1,9 @@
 #pragma once
 
-#include "pch.hpp"
+#include <sstream>
+#include <string>
+
+using uint32 = uint32_t;
 
 namespace Kara {
 namespace CoreTypes {

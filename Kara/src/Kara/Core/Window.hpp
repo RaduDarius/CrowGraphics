@@ -1,8 +1,11 @@
 #pragma once
 
-#include "Kara/Core/Context.hpp"
+#include "Kara/Core/Renderer/Context.hpp"
 #include "Kara/Core/Types.hpp"
 #include "Kara/EventSystem/Event.hpp"
+
+#include <functional>
+#include <string>
 
 namespace Kara {
 namespace Core {
@@ -37,7 +40,7 @@ public:
 
 protected:
   //! @brief The caller will lose ownership of [aContext]
-  void SetContext(Context *aContext);
+  void SetContext(Renderer::Context *aContext);
 
   //! Context related APIs
   inline void ContextSwapBuffers() { mContext->SwapBuffers(); }
@@ -46,7 +49,7 @@ protected:
   }
 
 private:
-  Context *mContext{nullptr};
+  Renderer::Context *mContext{nullptr};
 };
 
 } // namespace Core
