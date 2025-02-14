@@ -53,9 +53,9 @@ void WindowsWindow::OnUpdate() {
 
 CoreTypes::Size WindowsWindow::GetSize() const { return mData.mSize; }
 
-uint32 WindowsWindow::GetWidth() const { return mData.mSize.mWidth; }
+uint32_t WindowsWindow::GetWidth() const { return mData.mSize.mWidth; }
 
-uint32 WindowsWindow::GetHeight() const { return mData.mSize.mHeight; }
+uint32_t WindowsWindow::GetHeight() const { return mData.mSize.mHeight; }
 
 void *WindowsWindow::GetNativeWindow() const {
   return static_cast<void *>(mWindow);

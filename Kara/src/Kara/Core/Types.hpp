@@ -3,13 +3,11 @@
 #include <sstream>
 #include <string>
 
-using uint32 = uint32_t;
-
 namespace Kara {
 namespace CoreTypes {
 struct PixelPoint {
-  uint32 mX;
-  uint32 mY;
+  uint32_t mX;
+  uint32_t mY;
 
   std::string ToString() {
     std::stringstream ss;
@@ -19,8 +17,8 @@ struct PixelPoint {
 };
 
 struct Size {
-  uint32 mWidth;
-  uint32 mHeight;
+  uint32_t mWidth;
+  uint32_t mHeight;
 
   std::string ToString() {
     std::stringstream ss;

@@ -29,15 +29,15 @@ private:
 
 class KeyPressedEvent : public KeyEvent {
 public:
-  KeyPressedEvent(const KeyCode aKeyCode, const uint32 aRepeatCount)
+  KeyPressedEvent(const KeyCode aKeyCode, const uint32_t aRepeatCount)
       : KeyEvent{aKeyCode}, mRepeatCount{aRepeatCount} {}
 
-  inline uint32 GetDuration() const { return mRepeatCount; }
+  inline uint32_t GetDuration() const { return mRepeatCount; }
 
   EVENT_TYPE(KeyPressed);
 
 private:
-  const uint32 mRepeatCount;
+  const uint32_t mRepeatCount;
 };
 
 class KeyReleasedEvent : public KeyEvent {

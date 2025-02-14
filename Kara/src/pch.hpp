@@ -11,8 +11,6 @@
 #include <utility>
 #include <vector>
 
-using uint32 = uint32_t;
-
 #ifdef KARA_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif  // KARA_PLATFORM_WINDOWS
