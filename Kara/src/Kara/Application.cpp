@@ -8,8 +8,6 @@
 #include "Kara/LayerSystem/Layer.hpp"
 #include "Kara/Log/Logger.hpp"
 
-#include <glad/glad.h>
-
 namespace Kara {
 Application *Application::smInstance = nullptr;
 
@@ -19,7 +17,8 @@ Application::Application() {
   smInstance = this;
   KARA_CORE_ASSERT(smInstance, "Application should be a singleton !");
 
-  mWindow = std::unique_ptr<Core::Window>(Core::Window::Create());
+  mWindow.reset(Core::Window::Create());
+  mRenderer.reset(new Core::Render::Renderer(Core::Render::RenderApi::OpenGl));
 
   mUILayer = new UI::UILayer();
   mLayerStack.PushOverlay(mUILayer);
@@ -29,8 +28,7 @@ Application::Application() {
 
 void Application::Run() {
   while (mRunning) {
-    glClearColor(1, 0, 1, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
+    mRenderer->RenderTriangle();
 
     mLayerStack.map([](LayerSystem::Layer *aLayer) { aLayer->OnUpdate(); });
 

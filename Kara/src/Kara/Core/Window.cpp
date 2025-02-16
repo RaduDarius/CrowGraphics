@@ -8,7 +8,7 @@ namespace Kara {
 namespace Core {
 Window::~Window() { delete mContext; }
 
-void Window::SetContext(Renderer::Context *aContext) {
+void Window::SetContext(Render::Context *aContext) {
   // Preconditions
   KARA_CORE_ASSERT(aContext,
                    "Preconditions unsatisfied: aContext argument is NULL!");

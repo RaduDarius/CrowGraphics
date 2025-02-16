@@ -2,7 +2,7 @@
 
 #include "WindowsWindow.hpp"
 
-#include "Kara/Core/Platform/Windows/OpenGlContext.hpp"
+#include "Kara/Core/Platform/OpenGl/OpenGlContext.hpp"
 #include "Kara/EventSystem/Convertors.hpp"
 #include "Kara/EventSystem/KeyEvent.hpp"
 #include "Kara/EventSystem/MouseEvent.hpp"
