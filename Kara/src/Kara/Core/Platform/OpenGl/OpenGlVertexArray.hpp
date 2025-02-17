@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Kara/Core/Render/BufferLayout.hpp"
+#include "Kara/Core/Render/IndexBuffer.hpp"
 #include "Kara/Core/Render/VertexArray.hpp"
+#include "Kara/Core/Render/VertexBuffer.hpp"
 
 #include <glad/glad.h>
 
@@ -9,10 +11,6 @@
 
 namespace Kara {
 namespace Core {
-namespace Render {
-class VertexBuffer;
-class IndexBuffer;
-} // namespace Render
 namespace Platform {
 class OpenGlVertexArray : public Render::VertexArray {
 public:
@@ -24,14 +22,17 @@ public:
   void AddVertexBuffer(
       const std::shared_ptr<Render::VertexBuffer> &aBuffer) override;
 
+  const IBContainer &GetIndexBuffer() const override;
+  const VBContainer &GetVertexBuffers() const override;
+
   void Bind() const override;
   void Unbind() const override;
 
 private:
   GLenum ElementTypeToOpenGlType(Render::BufferElementType aType);
 
-  std::vector<std::shared_ptr<Render::VertexBuffer>> mVertexBuffers;
-  std::shared_ptr<Render::IndexBuffer> mIndexBuffer;
+  VBContainer mVertexBuffers;
+  IBContainer mIndexBuffer;
 
   unsigned int mRenderId;
 };

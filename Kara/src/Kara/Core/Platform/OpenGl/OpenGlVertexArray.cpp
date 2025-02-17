@@ -37,10 +37,20 @@ void OpenGlVertexArray::AddVertexBuffer(
     glVertexAttribPointer(index, element.mComponentCount,
                           ElementTypeToOpenGlType(element.mType),
                           element.mIsNormalized, layout.GetStride(),
-                          reinterpret_cast<void *>(element.mOffset));
+                          reinterpret_cast<const void *>(element.mOffset));
 
     index++;
   }
+}
+
+const OpenGlVertexArray::IBContainer &
+OpenGlVertexArray::GetIndexBuffer() const {
+  return mIndexBuffer;
+}
+
+const OpenGlVertexArray::VBContainer &
+OpenGlVertexArray::GetVertexBuffers() const {
+  return mVertexBuffers;
 }
 
 void OpenGlVertexArray::Bind() const { glBindVertexArray(mRenderId); }

@@ -5,6 +5,7 @@
 #include "Kara/Log/Logger.hpp"
 
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Kara {
 namespace Core {
@@ -33,6 +34,13 @@ Shader::Shader() {
 }
 
 void Shader::Bind() { glUseProgram(mShaderProgram); }
+
+void Shader::AddProjectionMat(const glm::mat4 &aProjectionMatrix) {
+  glUseProgram(mShaderProgram);
+  int projLoc = glGetUniformLocation(mShaderProgram, "projection");
+
+  glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(aProjectionMatrix));
+}
 
 //! @brief Caller should delete the shader after use.
 unsigned int Shader::CreateShader(const std::filesystem::path &aPath,

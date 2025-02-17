@@ -33,6 +33,7 @@ project "Kara"
         "%{prj.name}/vendor/GLFW/include", 
         "%{prj.name}/vendor/GLAD/include", 
         "%{prj.name}/vendor/imgui", 
+        "%{prj.name}/vendor/glm", 
         "%{prj.name}/src" 
     }
     
@@ -73,7 +74,11 @@ project "Sandbox"
 
     files { "%{prj.name}/src/**.hpp", "%{prj.name}/src/**.cpp" }
 
-    includedirs { "Kara/vendor/spdlog/include", "Kara/src" }
+    includedirs { 
+        "Kara/vendor/spdlog/include", 
+        "Kara/src", 
+        "Kara/vendor/glm" 
+    }
 
     links { "Kara" }
 

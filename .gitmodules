@@ -10,3 +10,6 @@
 [submodule "Kara/vendor/imgui"]
 	path = Kara/vendor/imgui
 	url = https://github.com/RaduDarius/imgui.git
+[submodule "Kara/vendor/glm"]
+	path = Kara/vendor/glm
+	url = https://github.com/g-truc/glm.git

@@ -8,7 +8,6 @@ namespace UI {
 class UILayer : public LayerSystem::Layer {
 public:
   UILayer();
-  ~UILayer();
 
   void OnAttach() override;
   void OnDetach() override;

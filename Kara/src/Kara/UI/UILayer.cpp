@@ -22,8 +22,6 @@ constexpr auto OpenGL3Version{"#version 410"};
 
 UILayer::UILayer() : LayerSystem::Layer{"UI Layer"} {}
 
-UILayer::~UILayer() {}
-
 void UILayer::OnAttach() {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 #include <filesystem>
 #include <string>
 
@@ -12,8 +14,11 @@ public:
 
   void Bind();
 
+  void AddProjectionMat(const glm::mat4 &aProjectionMatrix);
+
 private:
-  unsigned int CreateShader(const std::filesystem::path &aPath, const int aType);
+  unsigned int CreateShader(const std::filesystem::path &aPath,
+                            const int aType);
   void LinkShader(const unsigned int aShader);
 
   std::string ReadShaderFile(const std::filesystem::path &aPath);

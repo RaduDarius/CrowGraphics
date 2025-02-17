@@ -25,6 +25,10 @@ struct Size {
     ss << "(width: " << mWidth << " height: " << mHeight << ")";
     return ss.str();
   }
+
+  Size operator/(const int aScalar) const {
+    return {mWidth / aScalar, mHeight / aScalar};
+  }
 };
 
 } // namespace CoreTypes

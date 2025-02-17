@@ -2,11 +2,13 @@
 
 #include "Application.hpp"
 
+#include "Kara/Core/Render/Command.hpp"
 #include "Kara/EventSystem/Dispatcher.hpp"
 #include "Kara/EventSystem/Event.hpp"
 #include "Kara/EventSystem/WindowEvent.hpp"
 #include "Kara/LayerSystem/Layer.hpp"
 #include "Kara/Log/Logger.hpp"
+#include "Kara/UI/MainLayer.hpp"
 
 namespace Kara {
 Application *Application::smInstance = nullptr;
@@ -18,17 +20,17 @@ Application::Application() {
   KARA_CORE_ASSERT(smInstance, "Application should be a singleton !");
 
   mWindow.reset(Core::Window::Create());
-  mRenderer.reset(new Core::Render::Renderer(Core::Render::RenderApi::OpenGl));
 
   mUILayer = new UI::UILayer();
   mLayerStack.PushOverlay(mUILayer);
+  mLayerStack.Push(new UI::MainLayer());
 
   mWindow->SetEventCallback([&](EventSystem::Event &e) { return OnEvent(e); });
 }
 
 void Application::Run() {
   while (mRunning) {
-    mRenderer->RenderTriangle();
+    Core::Render::Command::Clear({1.0f, 0.0f, 1.0f, 1.0f});
 
     mLayerStack.map([](LayerSystem::Layer *aLayer) { aLayer->OnUpdate(); });
 
@@ -41,8 +43,6 @@ void Application::Run() {
 }
 
 void Application::OnEvent(EventSystem::Event &aEvent) {
-  // KARA_CORE_TRACE("{0}", aEvent.ToString());
-
   EventSystem::Dispatcher dispatcher{aEvent};
   dispatcher.Dispatch<EventSystem::WindowClosedEvent>(
       [&](Kara::EventSystem::WindowClosedEvent &e) -> bool {

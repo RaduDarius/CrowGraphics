@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Kara/Core/Core.hpp"
-#include "Kara/Core/Render/Renderer.hpp"
 #include "Kara/Core/Window.hpp"
 #include "Kara/LayerSystem/LayerStack.hpp"
 #include "Kara/UI/UILayer.hpp"
@@ -35,14 +34,15 @@ public:
 private:
   bool OnClose(EventSystem::WindowClosedEvent &aEvent);
 
-  std::unique_ptr<Core::Render::Renderer> mRenderer;
+  // Components
   std::unique_ptr<Core::Window> mWindow;
   UI::UILayer *mUILayer{nullptr};
-
   LayerSystem::LayerStack mLayerStack;
 
+  // Data
   bool mRunning{true};
 
+  // Instance
   static Application *smInstance;
 };
 
