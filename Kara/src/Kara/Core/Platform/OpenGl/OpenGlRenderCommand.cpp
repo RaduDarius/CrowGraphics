@@ -1,5 +1,6 @@
 #include "pch.hpp"
 
+#include "Kara/Core/Core.hpp"
 #include "Kara/Core/Render/Command.hpp"
 
 #include <glad/glad.h>
@@ -13,7 +14,7 @@ void Command::Clear(const glm::vec4 &aColor) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Command::Draw(const std::shared_ptr<VertexArray> &aVertexArray) {
+void Command::Draw(const Ref<VertexArray> &aVertexArray) {
   glDrawElements(GL_TRIANGLES, aVertexArray->GetIndexBuffer()->Count(),
                  GL_UNSIGNED_INT, nullptr);
 }

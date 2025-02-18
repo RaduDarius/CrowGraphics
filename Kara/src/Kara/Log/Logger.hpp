@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Kara/Core/Core.hpp"
 #include "spdlog/spdlog.h"
+
+#include <memory>
 
 namespace Kara {
 namespace Log {

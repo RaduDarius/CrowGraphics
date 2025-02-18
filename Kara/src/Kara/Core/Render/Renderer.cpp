@@ -3,6 +3,7 @@
 #include "Renderer.hpp"
 
 #include "Kara/Core/Platform/OpenGl/OpenGlIndexBuffer.hpp"
+#include "Kara/Core/Platform/OpenGl/OpenGlShader.hpp"
 #include "Kara/Core/Platform/OpenGl/OpenGlVertexArray.hpp"
 #include "Kara/Core/Platform/OpenGl/OpenGlVertexBuffer.hpp"
 #include "Kara/Core/Render/BufferLayout.hpp"
@@ -55,6 +56,22 @@ VertexBuffer *Renderer::CreateVertexBuffer(float *aVertices, uint32_t aSize) {
 
   case RenderApi::OpenGl:
     return new Platform::OpenGlVertexBuffer(aVertices, aSize);
+    break;
+
+  default:
+    KARA_CORE_ERROR("Unsupported render API");
+    break;
+  }
+  return nullptr;
+}
+
+Shader *Renderer::CreateShader() {
+  switch (mRenderApi) {
+  case RenderApi::None:
+    break;
+
+  case RenderApi::OpenGl:
+    return new Platform::OpenGlShader();
     break;
 
   default:

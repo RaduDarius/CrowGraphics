@@ -2,29 +2,24 @@
 
 #include <glm/glm.hpp>
 
-#include <filesystem>
-#include <string>
+#include <string_view>
 
 namespace Kara {
 namespace Core {
 namespace Render {
 class Shader {
 public:
-  Shader();
+  virtual ~Shader() = default;
 
-  void Bind();
+  virtual void Bind() const = 0;
+  virtual void Unbind() const = 0;
 
-  void AddProjectionMat(const glm::mat4 &aProjectionMatrix);
-
-private:
-  unsigned int CreateShader(const std::filesystem::path &aPath,
-                            const int aType);
-  void LinkShader(const unsigned int aShader);
-
-  std::string ReadShaderFile(const std::filesystem::path &aPath);
-
-  unsigned int mShaderProgram;
+  virtual void UploadUniformMat4(const std::string_view &aName,
+                                 const glm::mat4 &aMat) = 0;
+  virtual void UploadUniformVec4(const std::string_view &aName,
+                                 const glm::vec4 &aVec) = 0;
 };
+
 } // namespace Render
 } // namespace Core
 } // namespace Kara

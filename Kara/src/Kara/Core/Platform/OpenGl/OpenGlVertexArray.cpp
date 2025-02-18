@@ -16,7 +16,7 @@ OpenGlVertexArray::OpenGlVertexArray() {
 OpenGlVertexArray::~OpenGlVertexArray() { glDeleteVertexArrays(1, &mRenderId); }
 
 void OpenGlVertexArray::AddIndexBuffer(
-    const std::shared_ptr<Render::IndexBuffer> &aBuffer) {
+    const Ref<Render::IndexBuffer> &aBuffer) {
   mIndexBuffer = aBuffer;
 
   glBindVertexArray(mRenderId);
@@ -24,7 +24,7 @@ void OpenGlVertexArray::AddIndexBuffer(
 }
 
 void OpenGlVertexArray::AddVertexBuffer(
-    const std::shared_ptr<Render::VertexBuffer> &aBuffer) {
+    const Ref<Render::VertexBuffer> &aBuffer) {
   mVertexBuffers.emplace_back(aBuffer);
 
   glBindVertexArray(mRenderId);

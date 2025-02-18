@@ -9,3 +9,13 @@
 #else
 #error Only windows support available !
 #endif // KR_PLATFORM_WINDOWS
+
+#include <memory>
+
+namespace Kara {
+namespace Core {
+template <typename T> using Scope = std::unique_ptr<T>;
+
+template <typename T> using Ref = std::shared_ptr<T>;
+} // namespace Core
+} // namespace Kara

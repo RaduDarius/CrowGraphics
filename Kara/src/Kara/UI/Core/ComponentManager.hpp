@@ -11,7 +11,7 @@ class ComponentManager {
 public:
   ComponentManager();
 
-  void OnEvent(EventSystem::Event &aEvent);
+  void OnUpdate();
   void Render();
 
 private:

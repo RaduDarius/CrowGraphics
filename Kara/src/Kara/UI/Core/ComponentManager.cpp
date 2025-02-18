@@ -21,17 +21,9 @@ ComponentManager::ComponentManager() {
   mComponents.emplace_back(new Component(rect));
 }
 
-void ComponentManager::OnEvent(EventSystem::Event &aEvent) {
+void ComponentManager::OnUpdate() {
   for (const auto &component : mComponents) {
-    switch (aEvent.GetType()) {
-    case EventSystem::EventType::MouseMoved: {
-      auto &mouseEvent = dynamic_cast<EventSystem::MouseMovedEvent &>(aEvent);
-      component->HandleMouseMoved(mouseEvent.GetPosition());
-    } break;
-
-    default:
-      break;
-    }
+    component->OnUpdate();
   }
 }
 

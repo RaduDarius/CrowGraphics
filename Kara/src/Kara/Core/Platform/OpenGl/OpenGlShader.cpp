@@ -1,6 +1,6 @@
 #include "pch.hpp"
 
-#include "Shader.hpp"
+#include "OpenGlShader.hpp"
 
 #include "Kara/Log/Logger.hpp"
 
@@ -9,15 +9,15 @@
 
 namespace Kara {
 namespace Core {
-namespace Render {
+namespace Platform {
 namespace {
 //! @brief Relative to the parent. ".." IS INTENTIONAL DO NOT CHANGE IT.
 constexpr auto VertexShaderPath{"../Kara/shaders/basic.vert"};
 constexpr auto FragmentShaderPath{"../Kara/shaders/basic.frag"};
 } // namespace
 
-Shader::Shader() {
-  mShaderProgram = glCreateProgram();
+OpenGlShader::OpenGlShader() {
+  mRendererId = glCreateProgram();
   const auto vertShaderPath =
       std::filesystem::current_path().append(VertexShaderPath);
   auto vertShader = CreateShader(vertShaderPath, GL_VERTEX_SHADER);
@@ -26,25 +26,34 @@ Shader::Shader() {
       std::filesystem::current_path().append(FragmentShaderPath);
   auto fragShader = CreateShader(fragShaderPath, GL_FRAGMENT_SHADER);
 
-  LinkShader(mShaderProgram);
+  LinkShader(mRendererId);
 
   // Cleanup shaders
   glDeleteShader(vertShader);
   glDeleteShader(fragShader);
 }
 
-void Shader::Bind() { glUseProgram(mShaderProgram); }
+OpenGlShader::~OpenGlShader() { glDeleteProgram(mRendererId); }
 
-void Shader::AddProjectionMat(const glm::mat4 &aProjectionMatrix) {
-  glUseProgram(mShaderProgram);
-  int projLoc = glGetUniformLocation(mShaderProgram, "projection");
+void OpenGlShader::Bind() const { glUseProgram(mRendererId); }
 
-  glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(aProjectionMatrix));
+void OpenGlShader::Unbind() const { glUseProgram(0); }
+
+void OpenGlShader::UploadUniformMat4(const std::string_view &aName,
+                                     const glm::mat4 &aMat) {
+  int location = glGetUniformLocation(mRendererId, aName.data());
+  glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(aMat));
+}
+
+void OpenGlShader::UploadUniformVec4(const std::string_view &aName,
+                                     const glm::vec4 &aVec) {
+  int location = glGetUniformLocation(mRendererId, aName.data());
+  glUniform4f(location, aVec.x, aVec.y, aVec.z, aVec.w);
 }
 
 //! @brief Caller should delete the shader after use.
-unsigned int Shader::CreateShader(const std::filesystem::path &aPath,
-                                  const int aType) {
+unsigned int OpenGlShader::CreateShader(const std::filesystem::path &aPath,
+                                        const int aType) {
   const auto shaderStr = ReadShaderFile(aPath);
   const auto shaderSource = shaderStr.c_str();
 
@@ -56,20 +65,20 @@ unsigned int Shader::CreateShader(const std::filesystem::path &aPath,
   glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
   KARA_CORE_ASSERT(success, "Shader Compilation Failed");
 
-  glAttachShader(mShaderProgram, shader);
+  glAttachShader(mRendererId, shader);
 
   return shader;
 }
 
-void Shader::LinkShader(const unsigned int aShader) {
-  glLinkProgram(mShaderProgram);
+void OpenGlShader::LinkShader(const unsigned int aShader) {
+  glLinkProgram(mRendererId);
 
   int success;
   glGetProgramiv(aShader, GL_LINK_STATUS, &success);
   KARA_CORE_ASSERT(success, "Shader Program Linking Failed");
 }
 
-std::string Shader::ReadShaderFile(const std::filesystem::path &aPath) {
+std::string OpenGlShader::ReadShaderFile(const std::filesystem::path &aPath) {
   std::ifstream shaderFile(aPath);
 
   std::stringstream buffer;
@@ -77,6 +86,6 @@ std::string Shader::ReadShaderFile(const std::filesystem::path &aPath) {
   return buffer.str();
 }
 
-} // namespace Render
+} // namespace Platform
 } // namespace Core
 } // namespace Kara

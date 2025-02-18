@@ -35,7 +35,7 @@ private:
   bool OnClose(EventSystem::WindowClosedEvent &aEvent);
 
   // Components
-  std::unique_ptr<Core::Window> mWindow;
+  Core::Scope<Core::Window> mWindow;
   UI::UILayer *mUILayer{nullptr};
   LayerSystem::LayerStack mLayerStack;
 

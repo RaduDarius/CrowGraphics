@@ -45,9 +45,7 @@ void Application::Run() {
 void Application::OnEvent(EventSystem::Event &aEvent) {
   EventSystem::Dispatcher dispatcher{aEvent};
   dispatcher.Dispatch<EventSystem::WindowClosedEvent>(
-      [&](Kara::EventSystem::WindowClosedEvent &e) -> bool {
-        return OnClose(e);
-      });
+      [&](Kara::EventSystem::WindowClosedEvent &e) { return OnClose(e); });
 
   mLayerStack.mapi([&](LayerSystem::Layer *aLayer) {
     aLayer->OnEvent(aEvent);

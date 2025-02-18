@@ -9,10 +9,6 @@ enum class WindowIds {
   MASTER = 0,
 };
 
-struct NormalizedRect {
-  float X{0}, Y{0}, Width{0}, Height{0};
-};
-
 struct Rect {
   uint32_t X{0}, Y{0}, Width{0}, Height{0};
 
@@ -21,8 +17,6 @@ struct Rect {
       : X{aX}, Y{aY}, Width{aWidth}, Height{aHeight} {}
   Rect(const uint32_t aX, const uint32_t aY, const Kara::CoreTypes::Size &aSize)
       : Rect(aX, aY, aSize.mWidth, aSize.mHeight) {}
-
-  NormalizedRect Normalize();
 };
 
 } // namespace UI

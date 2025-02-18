@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Kara/Core/Render/IndexBuffer.hpp"
+#include "Kara/Core/Render/Shader.hpp"
 #include "Kara/Core/Render/VertexArray.hpp"
 #include "Kara/Core/Render/VertexBuffer.hpp"
 
@@ -16,6 +17,7 @@ public:
   VertexArray *CreateVertexArray();
   IndexBuffer *CreateIndexBuffer(uint32_t *aIndeces, uint32_t aSize);
   VertexBuffer *CreateVertexBuffer(float *aVertices, uint32_t aSize);
+  Shader *CreateShader();
 
 private:
   RenderApi mRenderApi;
