@@ -1,8 +1,9 @@
 #pragma once
 
 #ifdef KARA_PLATFORM_WINDOWS
-
-extern Kara::Application *Kara::CreateApplication();
+namespace Kara {
+extern Application *CreateApplication();
+}
 
 int main(int argc, char **argv) { Kara::CreateApplication()->Run(); }
 #endif

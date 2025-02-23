@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Kara/Core/Render/Context.hpp"
 #include "Kara/Core/Types.hpp"
-#include "Kara/EventSystem/Event.hpp"
+#include "Kara/Events/Event.hpp"
+#include "Kara/Graphics/Context.hpp"
 
 #include <functional>
 #include <string>
@@ -20,7 +20,7 @@ struct WindowProps {
 
 class Window {
 public:
-  using EventCallback = std::function<void(EventSystem::Event &)>;
+  using EventCallback = std::function<void(Events::Event &)>;
 
   virtual ~Window();
 
@@ -40,7 +40,7 @@ public:
 
 protected:
   //! @brief The caller will lose ownership of [aContext]
-  void SetContext(Render::Context *aContext);
+  void SetContext(Graphics::Context *aContext);
 
   //! Context related APIs
   inline void ContextSwapBuffers() { mContext->SwapBuffers(); }
@@ -49,7 +49,7 @@ protected:
   }
 
 private:
-  Render::Context *mContext{nullptr};
+  Graphics::Context *mContext{nullptr};
 };
 
 } // namespace Core

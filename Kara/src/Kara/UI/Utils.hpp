@@ -15,7 +15,7 @@ struct Rect {
   Rect(const uint32_t aX, const uint32_t aY, const uint32_t aWidth,
        const uint32_t aHeight)
       : X{aX}, Y{aY}, Width{aWidth}, Height{aHeight} {}
-  Rect(const uint32_t aX, const uint32_t aY, const Kara::CoreTypes::Size &aSize)
+  Rect(const uint32_t aX, const uint32_t aY, const CoreTypes::Size &aSize)
       : Rect(aX, aY, aSize.mWidth, aSize.mHeight) {}
 };
 

@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Kara/Core/Core.hpp"
-#include "Kara/LayerSystem/Layer.hpp"
+#include "Kara/Layers/Layer.hpp"
 
 namespace Kara {
 namespace UI {
-class UILayer : public LayerSystem::Layer {
+class UILayer : public Layers::Layer {
 public:
   UILayer();
 

@@ -3,9 +3,9 @@
 #include "UILayer.hpp"
 
 #include "Kara/Application.hpp"
-#include "Kara/EventSystem/KeyEvent.hpp"
-#include "Kara/EventSystem/MouseEvent.hpp"
-#include "Kara/EventSystem/WindowEvent.hpp"
+#include "Kara/Events/KeyEvent.hpp"
+#include "Kara/Events/MouseEvent.hpp"
+#include "Kara/Events/WindowEvent.hpp"
 
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
@@ -20,7 +20,7 @@ namespace {
 constexpr auto OpenGL3Version{"#version 410"};
 } // namespace
 
-UILayer::UILayer() : LayerSystem::Layer{"UI Layer"} {}
+UILayer::UILayer() : Layers::Layer{"UI Layer"} {}
 
 void UILayer::OnAttach() {
   IMGUI_CHECKVERSION();

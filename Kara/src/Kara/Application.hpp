@@ -2,18 +2,18 @@
 
 #include "Kara/Core/Core.hpp"
 #include "Kara/Core/Window.hpp"
-#include "Kara/LayerSystem/LayerStack.hpp"
+#include "Kara/Layers/LayerStack.hpp"
 #include "Kara/UI/UILayer.hpp"
 
 namespace Kara {
-namespace EventSystem {
+namespace Events {
 class Event;
 class WindowClosedEvent;
-} // namespace EventSystem
+} // namespace Events
 
-namespace LayerSystem {
+namespace Layers {
 class Layer;
-} // namespace LayerSystem
+} // namespace Layers
 
 class Application {
 public:
@@ -26,18 +26,18 @@ public:
   Core::Window *GetWindow() const { return mWindow.get(); }
   CoreTypes::Size GetWindowSize() const { return mWindow->GetSize(); }
 
-  void OnEvent(EventSystem::Event &aEvent);
+  void OnEvent(Events::Event &aEvent);
 
-  void Push(LayerSystem::Layer *aLayer);
-  void Pop(LayerSystem::Layer *aLayer);
+  void Push(Layers::Layer *aLayer);
+  void Pop(Layers::Layer *aLayer);
 
 private:
-  bool OnClose(EventSystem::WindowClosedEvent &aEvent);
+  bool OnClose(Events::WindowClosedEvent &aEvent);
 
   // Components
   Core::Scope<Core::Window> mWindow;
   UI::UILayer *mUILayer{nullptr};
-  LayerSystem::LayerStack mLayerStack;
+  Layers::LayerStack mLayerStack;
 
   // Data
   bool mRunning{true};

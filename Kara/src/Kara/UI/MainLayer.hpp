@@ -1,16 +1,16 @@
 #pragma once
 
 #include "Kara/Core/Core.hpp"
-#include "Kara/Core/Render/Camera.hpp"
-#include "Kara/EventSystem/Event.hpp"
-#include "Kara/LayerSystem/Layer.hpp"
-#include "Kara/UI/Core/ComponentManager.hpp"
+#include "Kara/Events/Event.hpp"
+#include "Kara/Graphics/Camera.hpp"
+#include "Kara/Layers/Layer.hpp"
+#include "Kara/UI/ComponentManager.hpp"
 
 #include <memory>
 
 namespace Kara {
 namespace UI {
-class MainLayer : public LayerSystem::Layer {
+class MainLayer : public Layers::Layer {
 public:
   MainLayer();
 
@@ -19,12 +19,12 @@ public:
   void OnUpdate() override;
 
 private:
-  Kara::Core::Render::Camera mCamera;
-  // Kara::Core::Scope<UI::Core::ComponentManager> mComponentManager;
-  Kara::Core::Scope<Kara::Core::Render::Renderer> mRenderer;
+  Graphics::Camera mCamera;
+  // Core::Scope<ComponentManager> mComponentManager;
+  Core::Scope<Graphics::Renderer> mRenderer;
 
-  Kara::Core::Ref<Kara::Core::Render::Shader> mShader;
-  Kara::Core::Ref<Kara::Core::Render::VertexArray> mVertexArray;
+  Core::Ref<Graphics::Shader> mShader;
+  Core::Ref<Graphics::VertexArray> mVertexArray;
 
   // Camera spec
   float mCameraMoveSpeed{10.0f};

@@ -5,7 +5,7 @@
 #include "Kara/Application.hpp"
 #include "Kara/Core/Core.hpp"
 #include "Kara/Core/InputManager.hpp"
-#include "Kara/Core/Render/Command.hpp"
+#include "Kara/Graphics/Command.hpp"
 #include "Kara/Log/Logger.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -14,15 +14,13 @@
 
 namespace Kara {
 namespace UI {
-using namespace Kara::Core;
-
 MainLayer::MainLayer()
-    : LayerSystem::Layer{"Main Layer"},
-      mCamera{Render::Camera{
+    : Layers::Layer{"Main Layer"},
+      mCamera{Graphics::Camera{
           0.0f, static_cast<float>(Application::Get()->GetWindow()->GetWidth()),
           static_cast<float>(Application::Get()->GetWindow()->GetHeight()),
           0.0f}} {
-  mRenderer.reset(new Render::Renderer(Render::RenderApi::OpenGl));
+  mRenderer.reset(new Graphics::Renderer(Graphics::RenderApi::OpenGl));
 
   mVertexArray.reset(mRenderer->CreateVertexArray());
 
@@ -35,18 +33,18 @@ MainLayer::MainLayer()
                       // Position 3
                       0.0f, 100.0f, 0.0f};
 
-  Ref<Render::VertexBuffer> vertexBuffer;
+  Core::Ref<Graphics::VertexBuffer> vertexBuffer;
   vertexBuffer.reset(mRenderer->CreateVertexBuffer(vertices, sizeof(vertices)));
 
-  Render::BufferLayout layout = {
-      {Render::BufferElementType::Float3, "inPosition"},
+  Graphics::BufferLayout layout = {
+      {Graphics::BufferElementType::Float3, "inPosition"},
   };
   vertexBuffer->SetLayout(layout);
 
   mVertexArray->AddVertexBuffer(vertexBuffer);
 
   uint32_t indeces[] = {0, 1, 2, 2, 3, 0};
-  Ref<Render::IndexBuffer> indexBuffer;
+  Core::Ref<Graphics::IndexBuffer> indexBuffer;
   indexBuffer.reset(mRenderer->CreateIndexBuffer(indeces, sizeof(indeces)));
   mVertexArray->AddIndexBuffer(indexBuffer);
 
@@ -63,39 +61,39 @@ void MainLayer::OnRender() {
 }
 
 void MainLayer::OnUpdate() {
-  if (InputManager::IsKeyPressed(EventSystem::KeyCode::I)) {
+  if (Core::InputManager::IsKeyPressed(Events::KeyCode::I)) {
     mCamera.AddPosition({0.0f, -mCameraMoveSpeed, 0.0f});
-  } else if (InputManager::IsKeyPressed(EventSystem::KeyCode::K)) {
+  } else if (Core::InputManager::IsKeyPressed(Events::KeyCode::K)) {
     mCamera.AddPosition({0.0f, mCameraMoveSpeed, 0.0f});
   }
 
-  if (InputManager::IsKeyPressed(EventSystem::KeyCode::L)) {
+  if (Core::InputManager::IsKeyPressed(Events::KeyCode::L)) {
     mCamera.AddPosition({mCameraMoveSpeed, 0.0f, 0.0f});
-  } else if (InputManager::IsKeyPressed(EventSystem::KeyCode::J)) {
+  } else if (Core::InputManager::IsKeyPressed(Events::KeyCode::J)) {
     mCamera.AddPosition({-mCameraMoveSpeed, 0.0f, 0.0f});
   }
 
-  if (InputManager::IsKeyPressed(EventSystem::KeyCode::U)) {
+  if (Core::InputManager::IsKeyPressed(Events::KeyCode::U)) {
     mCamera.AddRotation(-mCameraRotationSpeed);
-  } else if (InputManager::IsKeyPressed(EventSystem::KeyCode::O)) {
+  } else if (Core::InputManager::IsKeyPressed(Events::KeyCode::O)) {
     mCamera.AddRotation(mCameraRotationSpeed);
   }
 
-  if (InputManager::IsKeyPressed(EventSystem::KeyCode::W)) {
+  if (Core::InputManager::IsKeyPressed(Events::KeyCode::W)) {
     mPosition.y -= mObjMoveSpeed;
-  } else if (InputManager::IsKeyPressed(EventSystem::KeyCode::S)) {
+  } else if (Core::InputManager::IsKeyPressed(Events::KeyCode::S)) {
     mPosition.y += mObjMoveSpeed;
   }
 
-  if (InputManager::IsKeyPressed(EventSystem::KeyCode::D)) {
+  if (Core::InputManager::IsKeyPressed(Events::KeyCode::D)) {
     mPosition.x += mObjMoveSpeed;
-  } else if (InputManager::IsKeyPressed(EventSystem::KeyCode::A)) {
+  } else if (Core::InputManager::IsKeyPressed(Events::KeyCode::A)) {
     mPosition.x -= mObjMoveSpeed;
   }
 
-  if (InputManager::IsKeyPressed(EventSystem::KeyCode::Q)) {
+  if (Core::InputManager::IsKeyPressed(Events::KeyCode::Q)) {
     mRotation -= mObjRotationSpeed;
-  } else if (InputManager::IsKeyPressed(EventSystem::KeyCode::E)) {
+  } else if (Core::InputManager::IsKeyPressed(Events::KeyCode::E)) {
     mRotation += mObjRotationSpeed;
   }
 
@@ -109,7 +107,7 @@ void MainLayer::OnUpdate() {
   mShader->UploadUniformVec4("uColor", mColor);
 
   mVertexArray->Bind();
-  Render::Command::Draw(mVertexArray);
+  Graphics::Command::Draw(mVertexArray);
 }
 
 } // namespace UI

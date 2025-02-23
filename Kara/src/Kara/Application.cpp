@@ -2,11 +2,11 @@
 
 #include "Application.hpp"
 
-#include "Kara/Core/Render/Command.hpp"
-#include "Kara/EventSystem/Dispatcher.hpp"
-#include "Kara/EventSystem/Event.hpp"
-#include "Kara/EventSystem/WindowEvent.hpp"
-#include "Kara/LayerSystem/Layer.hpp"
+#include "Kara/Events/Dispatcher.hpp"
+#include "Kara/Events/Event.hpp"
+#include "Kara/Events/WindowEvent.hpp"
+#include "Kara/Graphics/Command.hpp"
+#include "Kara/Layers/Layer.hpp"
 #include "Kara/Log/Logger.hpp"
 #include "Kara/UI/MainLayer.hpp"
 
@@ -25,29 +25,29 @@ Application::Application() {
   mLayerStack.PushOverlay(mUILayer);
   mLayerStack.Push(new UI::MainLayer());
 
-  mWindow->SetEventCallback([&](EventSystem::Event &e) { return OnEvent(e); });
+  mWindow->SetEventCallback([&](Events::Event &e) { return OnEvent(e); });
 }
 
 void Application::Run() {
   while (mRunning) {
-    Core::Render::Command::Clear({1.0f, 0.0f, 1.0f, 1.0f});
+    Graphics::Command::Clear({1.0f, 0.0f, 1.0f, 1.0f});
 
-    mLayerStack.map([](LayerSystem::Layer *aLayer) { aLayer->OnUpdate(); });
+    mLayerStack.map([](Layers::Layer *aLayer) { aLayer->OnUpdate(); });
 
     mUILayer->Begin();
-    mLayerStack.map([](LayerSystem::Layer *aLayer) { aLayer->OnRender(); });
+    mLayerStack.map([](Layers::Layer *aLayer) { aLayer->OnRender(); });
     mUILayer->End();
 
     mWindow->OnUpdate();
   }
 }
 
-void Application::OnEvent(EventSystem::Event &aEvent) {
-  EventSystem::Dispatcher dispatcher{aEvent};
-  dispatcher.Dispatch<EventSystem::WindowClosedEvent>(
-      [&](Kara::EventSystem::WindowClosedEvent &e) { return OnClose(e); });
+void Application::OnEvent(Events::Event &aEvent) {
+  Events::Dispatcher dispatcher{aEvent};
+  dispatcher.Dispatch<Events::WindowClosedEvent>(
+      [&](Events::WindowClosedEvent &e) { return OnClose(e); });
 
-  mLayerStack.mapi([&](LayerSystem::Layer *aLayer) {
+  mLayerStack.mapi([&](Layers::Layer *aLayer) {
     aLayer->OnEvent(aEvent);
     if (aEvent.IsHandled()) {
       return true;
@@ -56,11 +56,11 @@ void Application::OnEvent(EventSystem::Event &aEvent) {
   });
 }
 
-void Application::Push(LayerSystem::Layer *aLayer) { mLayerStack.Push(aLayer); }
+void Application::Push(Layers::Layer *aLayer) { mLayerStack.Push(aLayer); }
 
-void Application::Pop(LayerSystem::Layer *aLayer) { mLayerStack.Pop(aLayer); }
+void Application::Pop(Layers::Layer *aLayer) { mLayerStack.Pop(aLayer); }
 
-bool Application::OnClose(EventSystem::WindowClosedEvent &aEvent) {
+bool Application::OnClose(Events::WindowClosedEvent &aEvent) {
   mRunning = false;
   return true;
 }
