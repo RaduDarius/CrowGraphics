@@ -7,6 +7,7 @@ namespace Graphics {
 class OpenGlTexture : public Texture {
 public:
   OpenGlTexture(const std::string_view &aPath);
+  ~OpenGlTexture() override;
 
   void Bind() const override;
   void Unbind() const override;

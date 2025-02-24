@@ -11,18 +11,21 @@ namespace Kara {
 namespace Graphics {
 namespace {
 //! @brief Relative to the parent. ".." IS INTENTIONAL DO NOT CHANGE IT.
-constexpr auto VertexShaderPath{"../Kara/shaders/basic.vert"};
-constexpr auto FragmentShaderPath{"../Kara/shaders/basic.frag"};
+constexpr auto BasicVertexShaderPath{"../Kara/shaders/basic.vert"};
+constexpr auto BasicFragmentShaderPath{"../Kara/shaders/basic.frag"};
+
+constexpr auto TextureVertexShaderPath{"../Kara/shaders/texture.vert"};
+constexpr auto TextureFragmentShaderPath{"../Kara/shaders/texture.frag"};
 } // namespace
 
-OpenGlShader::OpenGlShader() {
+OpenGlShader::OpenGlShader(const Type aType) : Shader{aType} {
   mRendererId = glCreateProgram();
-  const auto vertShaderPath =
-      std::filesystem::current_path().append(VertexShaderPath);
+  auto [vertPath, fragPath] = GetShaderPaths();
+
+  const auto vertShaderPath = std::filesystem::current_path().append(vertPath);
   auto vertShader = CreateShader(vertShaderPath, GL_VERTEX_SHADER);
 
-  const auto fragShaderPath =
-      std::filesystem::current_path().append(FragmentShaderPath);
+  const auto fragShaderPath = std::filesystem::current_path().append(fragPath);
   auto fragShader = CreateShader(fragShaderPath, GL_FRAGMENT_SHADER);
 
   LinkShader(mRendererId);
@@ -50,6 +53,12 @@ void OpenGlShader::UploadUniformVec4(const std::string_view &aName,
   glUniform4f(location, aVec.x, aVec.y, aVec.z, aVec.w);
 }
 
+void OpenGlShader::UploadUniformInt(const std::string_view &aName,
+                                    const unsigned int aInt) {
+  int location = glGetUniformLocation(mRendererId, aName.data());
+  glUniform1i(location, aInt);
+}
+
 //! @brief Caller should delete the shader after use.
 unsigned int OpenGlShader::CreateShader(const std::filesystem::path &aPath,
                                         const int aType) {
@@ -67,6 +76,18 @@ unsigned int OpenGlShader::CreateShader(const std::filesystem::path &aPath,
   glAttachShader(mRendererId, shader);
 
   return shader;
+}
+
+std::pair<std::string_view, std::string_view>
+OpenGlShader::GetShaderPaths() const {
+  switch (GetType()) {
+  case Type::Texture:
+    return {TextureVertexShaderPath, TextureFragmentShaderPath};
+
+  case Type::Basic:
+  default:
+    return {BasicVertexShaderPath, BasicFragmentShaderPath};
+  }
 }
 
 void OpenGlShader::LinkShader(const unsigned int aShader) {

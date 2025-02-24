@@ -5,6 +5,7 @@
 #include "Kara/Graphics/BufferLayout.hpp"
 #include "Kara/Graphics/Platform/OpenGl/OpenGlIndexBuffer.hpp"
 #include "Kara/Graphics/Platform/OpenGl/OpenGlShader.hpp"
+#include "Kara/Graphics/Platform/OpenGl/OpenGlTexture.hpp"
 #include "Kara/Graphics/Platform/OpenGl/OpenGlVertexArray.hpp"
 #include "Kara/Graphics/Platform/OpenGl/OpenGlVertexBuffer.hpp"
 #include "Kara/Log/Logger.hpp"
@@ -15,13 +16,13 @@ namespace Kara {
 namespace Graphics {
 Renderer::Renderer(const RenderApi aRenderApi) : mRenderApi{aRenderApi} {}
 
-VertexArray *Renderer::CreateVertexArray() {
+Core::Ref<VertexArray> Renderer::CreateVertexArray() {
   switch (mRenderApi) {
   case RenderApi::None:
     break;
 
   case RenderApi::OpenGl:
-    return new OpenGlVertexArray();
+    return std::make_shared<OpenGlVertexArray>();
     break;
 
   default:
@@ -32,13 +33,14 @@ VertexArray *Renderer::CreateVertexArray() {
   return nullptr;
 }
 
-IndexBuffer *Renderer::CreateIndexBuffer(uint32_t *aIndeces, uint32_t aSize) {
+Core::Ref<IndexBuffer> Renderer::CreateIndexBuffer(uint32_t *aIndeces,
+                                                   uint32_t aSize) {
   switch (mRenderApi) {
   case RenderApi::None:
     break;
 
   case RenderApi::OpenGl:
-    return new OpenGlIndexBuffer(aIndeces, aSize);
+    return std::make_shared<OpenGlIndexBuffer>(aIndeces, aSize);
     break;
 
   default:
@@ -48,13 +50,14 @@ IndexBuffer *Renderer::CreateIndexBuffer(uint32_t *aIndeces, uint32_t aSize) {
   return nullptr;
 }
 
-VertexBuffer *Renderer::CreateVertexBuffer(float *aVertices, uint32_t aSize) {
+Core::Ref<VertexBuffer> Renderer::CreateVertexBuffer(float *aVertices,
+                                                     uint32_t aSize) {
   switch (mRenderApi) {
   case RenderApi::None:
     break;
 
   case RenderApi::OpenGl:
-    return new OpenGlVertexBuffer(aVertices, aSize);
+    return std::make_shared<OpenGlVertexBuffer>(aVertices, aSize);
     break;
 
   default:
@@ -64,13 +67,29 @@ VertexBuffer *Renderer::CreateVertexBuffer(float *aVertices, uint32_t aSize) {
   return nullptr;
 }
 
-Shader *Renderer::CreateShader() {
+Core::Ref<Shader> Renderer::CreateShader(const Shader::Type aShaderType) {
   switch (mRenderApi) {
   case RenderApi::None:
     break;
 
   case RenderApi::OpenGl:
-    return new OpenGlShader();
+    return std::make_shared<OpenGlShader>(aShaderType);
+    break;
+
+  default:
+    KARA_CORE_ERROR("Unsupported render API");
+    break;
+  }
+  return nullptr;
+}
+
+Core::Ref<Texture> Renderer::CreateTexture(const std::string_view &aPath) {
+  switch (mRenderApi) {
+  case RenderApi::None:
+    break;
+
+  case RenderApi::OpenGl:
+    return std::make_shared<OpenGlTexture>(aPath);
     break;
 
   default:

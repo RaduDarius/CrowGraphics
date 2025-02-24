@@ -6,7 +6,7 @@
 
 namespace Kara {
 namespace Graphics {
-enum class BufferElementType : uint8_t { None, Float3, Float4 };
+enum class BufferElementType : uint8_t { None, Float2, Float3, Float4 };
 
 struct BufferElement {
   BufferElementType mType;

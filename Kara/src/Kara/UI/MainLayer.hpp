@@ -3,6 +3,10 @@
 #include "Kara/Core/Core.hpp"
 #include "Kara/Events/Event.hpp"
 #include "Kara/Graphics/Camera.hpp"
+#include "Kara/Graphics/Renderer.hpp"
+#include "Kara/Graphics/Shader.hpp"
+#include "Kara/Graphics/Texture.hpp"
+#include "Kara/Graphics/VertexArray.hpp"
 #include "Kara/Layers/Layer.hpp"
 #include "Kara/UI/ComponentManager.hpp"
 
@@ -24,6 +28,9 @@ private:
   Core::Scope<Graphics::Renderer> mRenderer;
 
   Core::Ref<Graphics::Shader> mShader;
+  Core::Ref<Graphics::Shader> mTextureShader;
+  Core::Ref<Graphics::Texture> mTexture;
+
   Core::Ref<Graphics::VertexArray> mVertexArray;
 
   // Camera spec
@@ -33,6 +40,7 @@ private:
   float mObjRotationSpeed{10.0f};
   glm::vec4 mColor{0.0f, 0.0f, 1.0f, 1.0f};
   glm::vec3 mPosition{0.0f};
+  glm::vec3 mCenter{50.f, 50.f, 0.0f};
   float mRotation{0.0f};
 };
 } // namespace UI

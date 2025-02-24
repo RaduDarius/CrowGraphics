@@ -22,22 +22,31 @@ MainLayer::MainLayer()
           0.0f}} {
   mRenderer.reset(new Graphics::Renderer(Graphics::RenderApi::OpenGl));
 
-  mVertexArray.reset(mRenderer->CreateVertexArray());
+  mVertexArray = mRenderer->CreateVertexArray();
 
   float vertices[] = {// Position 0
                       0.0f, 0.0f, 0.0f,
+                      // Text Coordinates 0
+                      0.0f, 0.0f,
                       // Position 1
                       100.0f, 0.0f, 0.0f,
+                      // Text Coordinates 1
+                      1.0f, 0.0f,
                       // Position 2
                       100.0f, 100.0f, 0.0f,
+                      // Text Coordinates 2
+                      1.0f, 1.0f,
                       // Position 3
-                      0.0f, 100.0f, 0.0f};
+                      0.0f, 100.0f, 0.0f,
+                      // Text Coordinates
+                      0.0f, 1.0f};
 
   Core::Ref<Graphics::VertexBuffer> vertexBuffer;
-  vertexBuffer.reset(mRenderer->CreateVertexBuffer(vertices, sizeof(vertices)));
+  vertexBuffer = mRenderer->CreateVertexBuffer(vertices, sizeof(vertices));
 
   Graphics::BufferLayout layout = {
       {Graphics::BufferElementType::Float3, "inPosition"},
+      {Graphics::BufferElementType::Float2, "inTextCoord"},
   };
   vertexBuffer->SetLayout(layout);
 
@@ -45,10 +54,14 @@ MainLayer::MainLayer()
 
   uint32_t indeces[] = {0, 1, 2, 2, 3, 0};
   Core::Ref<Graphics::IndexBuffer> indexBuffer;
-  indexBuffer.reset(mRenderer->CreateIndexBuffer(indeces, sizeof(indeces)));
+  indexBuffer = mRenderer->CreateIndexBuffer(indeces, sizeof(indeces));
   mVertexArray->AddIndexBuffer(indexBuffer);
 
-  mShader.reset(mRenderer->CreateShader());
+  mShader = mRenderer->CreateShader(Graphics::Shader::Type::Basic);
+  mTextureShader = mRenderer->CreateShader(Graphics::Shader::Type::Texture);
+
+  mTexture = mRenderer->CreateTexture(
+      "C:\\Users\\Darius Radu\\Desktop\\texture_test_2.jpg");
 }
 
 void MainLayer::OnAttach() {
@@ -98,13 +111,18 @@ void MainLayer::OnUpdate() {
   }
 
   auto transform = glm::translate(glm::mat4(1.0f), mPosition);
+  transform = glm::translate(transform, mCenter);
   transform =
       glm::rotate(transform, glm::radians(mRotation), glm::vec3(0, 0, 1));
+  transform = glm::translate(transform, -mCenter);
 
-  mShader->Bind();
-  mShader->UploadUniformMat4("uVP", mCamera.GetVPMat());
-  mShader->UploadUniformMat4("uModel", transform);
-  mShader->UploadUniformVec4("uColor", mColor);
+  mTexture->Bind();
+  mTextureShader->Bind();
+  mTextureShader->UploadUniformMat4("uVP", mCamera.GetVPMat());
+  mTextureShader->UploadUniformMat4("uModel", transform);
+  mTextureShader->UploadUniformInt("uTexture", 1);
+
+  // mTextureShader->UploadUniformVec4("uColor", mColor);
 
   mVertexArray->Bind();
   Graphics::Command::Draw(mVertexArray);

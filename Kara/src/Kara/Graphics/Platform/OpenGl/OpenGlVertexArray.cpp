@@ -57,6 +57,7 @@ void OpenGlVertexArray::Unbind() const { glBindVertexArray(0); }
 
 GLenum OpenGlVertexArray::ElementTypeToOpenGlType(BufferElementType aType) {
   switch (aType) {
+  case BufferElementType::Float2:
   case BufferElementType::Float3:
   case BufferElementType::Float4:
     return GL_FLOAT;

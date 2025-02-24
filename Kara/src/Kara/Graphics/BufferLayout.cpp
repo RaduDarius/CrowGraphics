@@ -20,6 +20,11 @@ void BufferElement::SetSizeAndComponentCount() {
   case BufferElementType::None:
     break;
 
+  case BufferElementType::Float2:
+    mComponentCount = 2;
+    mSize = mComponentCount * sizeof(float);
+    break;
+
   case BufferElementType::Float3:
     mComponentCount = 3;
     mSize = mComponentCount * sizeof(float);

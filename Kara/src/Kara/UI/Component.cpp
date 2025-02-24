@@ -16,7 +16,7 @@ namespace UI {
 Component::Component(const Rect &aRect) : mRect{aRect} {
   mRenderer.reset(new Graphics::Renderer(Graphics::RenderApi::OpenGl));
 
-  mVertexArray.reset(mRenderer->CreateVertexArray());
+  mVertexArray = mRenderer->CreateVertexArray();
 
   float vertices[] = {// Position 0
                       static_cast<float>(mRect.X), static_cast<float>(mRect.Y),
@@ -32,7 +32,7 @@ Component::Component(const Rect &aRect) : mRect{aRect} {
                       static_cast<float>(mRect.Y + mRect.Height), 0.0f};
 
   Core::Ref<Graphics::VertexBuffer> vertexBuffer;
-  vertexBuffer.reset(mRenderer->CreateVertexBuffer(vertices, sizeof(vertices)));
+  vertexBuffer = mRenderer->CreateVertexBuffer(vertices, sizeof(vertices));
 
   Graphics::BufferLayout layout = {
       {Graphics::BufferElementType::Float3, "inPosition"},
@@ -43,10 +43,10 @@ Component::Component(const Rect &aRect) : mRect{aRect} {
 
   uint32_t indeces[] = {0, 1, 2, 2, 3, 0};
   Core::Ref<Graphics::IndexBuffer> indexBuffer;
-  indexBuffer.reset(mRenderer->CreateIndexBuffer(indeces, sizeof(indeces)));
+  indexBuffer = mRenderer->CreateIndexBuffer(indeces, sizeof(indeces));
   mVertexArray->AddIndexBuffer(indexBuffer);
 
-  mShader.reset(mRenderer->CreateShader());
+  mShader = mRenderer->CreateShader(Graphics::Shader::Type::Basic);
 }
 
 void Component::Render() {
