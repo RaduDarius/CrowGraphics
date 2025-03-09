@@ -71,6 +71,14 @@ void MainLayer::OnAttach() {
 void MainLayer::OnRender() {
   // mComponentManager->Render();
   ImGui::ColorEdit3("Color", glm::value_ptr(mColor));
+
+  ImGui::DragFloat3("Position", &mPosition.x);
+  ImGui::DragFloat("Rotation", &mRotation, 1.0f, -180.0f, 180.0f);
+
+  ImGui::DragFloat("Camera move Speed", &mCameraMoveSpeed);
+  ImGui::DragFloat("Camera rotation Speed", &mCameraRotationSpeed);
+  ImGui::DragFloat("Object move Speed", &mObjMoveSpeed);
+  ImGui::DragFloat("Object rotation Speed", &mObjRotationSpeed);
 }
 
 void MainLayer::OnUpdate() {
