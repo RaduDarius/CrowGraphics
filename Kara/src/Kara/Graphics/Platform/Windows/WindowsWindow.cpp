@@ -18,9 +18,9 @@ auto sGLFWInitialized{false};
 }
 
 WindowsWindow::WindowsWindow(const Core::WindowProps &aProps)
-    : mData{aProps.mTitle, aProps.mSize} {
-  KARA_CORE_INFO("Creating window {0}, {1}", mData.mTitle,
-                 mData.mSize.ToString());
+    : mData{aProps.Title, aProps.Size} {
+  KARA_CORE_INFO("Creating window {0}, {1}", mData.Title,
+                 mData.Size.ToString());
 
   if (!sGLFWInitialized) {
     const auto success = glfwInit();
@@ -33,8 +33,8 @@ WindowsWindow::WindowsWindow(const Core::WindowProps &aProps)
     sGLFWInitialized = true;
   }
 
-  mWindow = glfwCreateWindow(mData.mSize.mWidth, mData.mSize.mHeight,
-                             mData.mTitle.c_str(), nullptr, nullptr);
+  mWindow = glfwCreateWindow(mData.Size.Width, mData.Size.Height,
+                             mData.Title.c_str(), nullptr, nullptr);
   SetContext(new OpenGlContext(mWindow));
 
   glfwSetWindowUserPointer(mWindow, reinterpret_cast<void *>(&mData));
@@ -50,29 +50,29 @@ void WindowsWindow::OnUpdate() {
   ContextSwapBuffers();
 }
 
-CoreTypes::Size WindowsWindow::GetSize() const { return mData.mSize; }
+CoreTypes::Size WindowsWindow::GetSize() const { return mData.Size; }
 
-uint32_t WindowsWindow::GetWidth() const { return mData.mSize.mWidth; }
+uint32_t WindowsWindow::GetWidth() const { return mData.Size.Width; }
 
-uint32_t WindowsWindow::GetHeight() const { return mData.mSize.mHeight; }
+uint32_t WindowsWindow::GetHeight() const { return mData.Size.Height; }
 
 void *WindowsWindow::GetNativeWindow() const {
   return static_cast<void *>(mWindow);
 }
 
-bool WindowsWindow::IsVSync() const { return mData.mVSync; }
+bool WindowsWindow::IsVSync() const { return mData.VSync; }
 
 void WindowsWindow::SetEventCallback(const EventCallback &aCallback) {
-  mData.mEventCallback = aCallback;
+  mData.EventCallback = aCallback;
 }
 
 void WindowsWindow::SetVSync(const bool aEnable) {
-  if (aEnable == mData.mVSync) {
+  if (aEnable == mData.VSync) {
     return;
   }
 
-  mData.mVSync = aEnable;
-  ContextSwapInterval(mData.mVSync);
+  mData.VSync = aEnable;
+  ContextSwapInterval(mData.VSync);
 }
 
 void WindowsWindow::SetupEvents() {
@@ -83,9 +83,9 @@ void WindowsWindow::SetupEvents() {
 
         Events::WindowResizedEvent event{static_cast<float>(aWidth),
                                          static_cast<float>(aHeight)};
-        data.mSize.mWidth = aWidth;
-        data.mSize.mHeight = aHeight;
-        data.mEventCallback(event);
+        data.Size.Width = aWidth;
+        data.Size.Height = aHeight;
+        data.EventCallback(event);
       });
 
   glfwSetWindowCloseCallback(mWindow, [](GLFWwindow *aWindow) {
@@ -93,7 +93,7 @@ void WindowsWindow::SetupEvents() {
         *reinterpret_cast<WindowData *>(glfwGetWindowUserPointer(aWindow));
 
     Events::WindowClosedEvent event;
-    data.mEventCallback(event);
+    data.EventCallback(event);
   });
 
   glfwSetKeyCallback(mWindow, [](GLFWwindow *aWindow, int aKey, int aScanCode,
@@ -104,17 +104,17 @@ void WindowsWindow::SetupEvents() {
     switch (aAction) {
     case GLFW_PRESS: {
       Events::KeyPressedEvent e{Events::ConvertToKeyCode(aKey), 0};
-      data.mEventCallback(e);
+      data.EventCallback(e);
     } break;
 
     case GLFW_RELEASE: {
       Events::KeyReleasedEvent e{Events::ConvertToKeyCode(aKey)};
-      data.mEventCallback(e);
+      data.EventCallback(e);
     } break;
 
     case GLFW_REPEAT: {
       Events::KeyPressedEvent e{Events::ConvertToKeyCode(aKey), 1};
-      data.mEventCallback(e);
+      data.EventCallback(e);
     } break;
 
     default:
@@ -127,7 +127,7 @@ void WindowsWindow::SetupEvents() {
         *reinterpret_cast<WindowData *>(glfwGetWindowUserPointer(aWindow));
 
     Events::KeyTypedEvent e{Events::ConvertToKeyCode(aKeyCode)};
-    data.mEventCallback(e);
+    data.EventCallback(e);
   });
 
   glfwSetMouseButtonCallback(
@@ -139,13 +139,13 @@ void WindowsWindow::SetupEvents() {
         case GLFW_PRESS: {
           Events::MouseButtonPressedEvent e{
               Events::ConvertToMouseButtonId(aButton)};
-          data.mEventCallback(e);
+          data.EventCallback(e);
         } break;
 
         case GLFW_RELEASE: {
           Events::MouseButtonReleasedEvent e{
               Events::ConvertToMouseButtonId(aButton)};
-          data.mEventCallback(e);
+          data.EventCallback(e);
         } break;
 
         default:
@@ -160,7 +160,7 @@ void WindowsWindow::SetupEvents() {
 
         Events::MouseScrolledEvent e{static_cast<float>(aXOffset),
                                      static_cast<float>(aYOffset)};
-        data.mEventCallback(e);
+        data.EventCallback(e);
       });
 
   glfwSetCursorPosCallback(
@@ -170,7 +170,7 @@ void WindowsWindow::SetupEvents() {
 
         Events::MouseMovedEvent e{static_cast<float>(aXPos),
                                   static_cast<float>(aYPos)};
-        data.mEventCallback(e);
+        data.EventCallback(e);
       });
 }
 

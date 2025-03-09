@@ -31,11 +31,11 @@ private:
 
   // Data
   struct WindowData {
-    std::string mTitle;
-    CoreTypes::Size mSize;
-    bool mVSync{false};
+    std::string Title;
+    CoreTypes::Size Size;
+    bool VSync{false};
 
-    EventCallback mEventCallback;
+    EventCallback EventCallback;
   };
 
   WindowData mData;

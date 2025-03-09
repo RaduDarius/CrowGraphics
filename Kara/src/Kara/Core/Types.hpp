@@ -6,28 +6,28 @@
 namespace Kara {
 namespace CoreTypes {
 struct PixelPoint {
-  uint32_t mX;
-  uint32_t mY;
+  uint32_t X;
+  uint32_t Y;
 
   std::string ToString() {
     std::stringstream ss;
-    ss << "(X: " << mX << " Y: " << mY << ")";
+    ss << "(X: " << X << " Y: " << Y << ")";
     return ss.str();
   }
 };
 
 struct Size {
-  uint32_t mWidth;
-  uint32_t mHeight;
+  uint32_t Width;
+  uint32_t Height;
 
   std::string ToString() {
     std::stringstream ss;
-    ss << "(width: " << mWidth << " height: " << mHeight << ")";
+    ss << "(width: " << Width << " height: " << Height << ")";
     return ss.str();
   }
 
   Size operator/(const int aScalar) const {
-    return {mWidth / aScalar, mHeight / aScalar};
+    return {Width / aScalar, Height / aScalar};
   }
 };
 

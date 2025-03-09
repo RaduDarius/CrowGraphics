@@ -32,10 +32,10 @@ void OpenGlVertexArray::AddVertexBuffer(
   const auto &layout = aBuffer->GetLayout();
   for (const auto &element : layout) {
     glEnableVertexAttribArray(index);
-    glVertexAttribPointer(index, element.mComponentCount,
-                          ElementTypeToOpenGlType(element.mType),
-                          element.mIsNormalized, layout.GetStride(),
-                          reinterpret_cast<const void *>(element.mOffset));
+    glVertexAttribPointer(index, element.ComponentCount,
+                          ElementTypeToOpenGlType(element.Type),
+                          element.IsNormalized, layout.GetStride(),
+                          reinterpret_cast<const void *>(element.Offset));
 
     index++;
   }

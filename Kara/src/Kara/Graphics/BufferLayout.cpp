@@ -8,31 +8,31 @@ namespace Kara {
 namespace Graphics {
 BufferElement::BufferElement(const BufferElementType aType,
                              const std::string &aName)
-    : mType{aType}, mName{aName} {
+    : Type{aType}, Name{aName} {
   SetSizeAndComponentCount();
 }
 
 void BufferElement::SetSizeAndComponentCount() {
-  mComponentCount = 0;
-  mSize = 0;
+  ComponentCount = 0;
+  Size = 0;
 
-  switch (mType) {
+  switch (Type) {
   case BufferElementType::None:
     break;
 
   case BufferElementType::Float2:
-    mComponentCount = 2;
-    mSize = mComponentCount * sizeof(float);
+    ComponentCount = 2;
+    Size = ComponentCount * sizeof(float);
     break;
 
   case BufferElementType::Float3:
-    mComponentCount = 3;
-    mSize = mComponentCount * sizeof(float);
+    ComponentCount = 3;
+    Size = ComponentCount * sizeof(float);
     break;
 
   case BufferElementType::Float4:
-    mComponentCount = 4;
-    mSize = mComponentCount * sizeof(float);
+    ComponentCount = 4;
+    Size = ComponentCount * sizeof(float);
     break;
 
   default:
@@ -51,10 +51,10 @@ void BufferLayout::ComputeOffsetAndStride() {
   auto offset{0};
   mStride = 0;
   for (auto &element : mElements) {
-    element.mOffset = offset;
-    offset += element.mSize;
+    element.Offset = offset;
+    offset += element.Size;
 
-    mStride += element.mSize;
+    mStride += element.Size;
   }
 }
 

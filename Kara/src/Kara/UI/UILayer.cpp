@@ -66,8 +66,8 @@ void UILayer::End() {
   auto &io = ImGui::GetIO();
   auto windowSize = Application::Get()->GetWindowSize();
 
-  io.DisplaySize = ImVec2(static_cast<float>(windowSize.mWidth),
-                          static_cast<float>(windowSize.mHeight));
+  io.DisplaySize = ImVec2(static_cast<float>(windowSize.Width),
+                          static_cast<float>(windowSize.Height));
 
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

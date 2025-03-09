@@ -6,6 +6,8 @@
 
 namespace Kara {
 namespace UI {
+struct RenderObj {};
+
 class Component {
 public:
   using Color = glm::vec4;

@@ -9,13 +9,13 @@ namespace Graphics {
 enum class BufferElementType : uint8_t { None, Float2, Float3, Float4 };
 
 struct BufferElement {
-  BufferElementType mType;
-  std::string mName;
-  uint32_t mSize{0};
-  uint32_t mOffset{0};
-  bool mIsNormalized{false};
+  BufferElementType Type;
+  std::string Name;
+  uint32_t Size{0};
+  uint32_t Offset{0};
+  bool IsNormalized{false};
 
-  uint32_t mComponentCount{0};
+  uint32_t ComponentCount{0};
 
   BufferElement(const BufferElementType aType, const std::string &aName);
 

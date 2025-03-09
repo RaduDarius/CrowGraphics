@@ -12,10 +12,10 @@ namespace Core {
 struct WindowProps {
   WindowProps() = default;
   WindowProps(const std::string aTitle, const CoreTypes::Size aSize)
-      : mTitle{aTitle}, mSize{aSize} {}
+      : Title{aTitle}, Size{aSize} {}
 
-  std::string mTitle{"Window app"};
-  CoreTypes::Size mSize{1280, 720};
+  std::string Title{"Window app"};
+  CoreTypes::Size Size{1280, 720};
 };
 
 class Window {
