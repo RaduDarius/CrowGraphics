@@ -60,8 +60,8 @@ MainLayer::MainLayer()
   mShader = mRenderer->CreateShader(Graphics::Shader::Type::Basic);
   mTextureShader = mRenderer->CreateShader(Graphics::Shader::Type::Texture);
 
-  mTexture = mRenderer->CreateTexture(
-      "C:\\Users\\Darius Radu\\Desktop\\texture_test_2.jpg");
+  mTexture =
+      mRenderer->CreateTexture("../Kara/assets/textures/texture_test_2.jpg");
 }
 
 void MainLayer::OnAttach() {

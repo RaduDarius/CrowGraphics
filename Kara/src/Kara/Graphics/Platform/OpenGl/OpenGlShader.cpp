@@ -11,11 +11,11 @@ namespace Kara {
 namespace Graphics {
 namespace {
 //! @brief Relative to the parent. ".." IS INTENTIONAL DO NOT CHANGE IT.
-constexpr auto BasicVertexShaderPath{"../Kara/shaders/basic.vert"};
-constexpr auto BasicFragmentShaderPath{"../Kara/shaders/basic.frag"};
+constexpr auto BasicVertexShaderPath{"../Kara/assets/shaders/basic.vert"};
+constexpr auto BasicFragmentShaderPath{"../Kara/assets/shaders/basic.frag"};
 
-constexpr auto TextureVertexShaderPath{"../Kara/shaders/texture.vert"};
-constexpr auto TextureFragmentShaderPath{"../Kara/shaders/texture.frag"};
+constexpr auto TextureVertexShaderPath{"../Kara/assets/shaders/texture.vert"};
+constexpr auto TextureFragmentShaderPath{"../Kara/assets/shaders/texture.frag"};
 } // namespace
 
 OpenGlShader::OpenGlShader(const Type aType) : Shader{aType} {
