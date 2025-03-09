@@ -4,11 +4,6 @@
 
 namespace Kara {
 namespace UI {
-//! @brief The 0 window id is reserved for the master window/component
-enum class WindowIds {
-  MASTER = 0,
-};
-
 struct Rect {
   uint32_t X{0}, Y{0}, Width{0}, Height{0};
 

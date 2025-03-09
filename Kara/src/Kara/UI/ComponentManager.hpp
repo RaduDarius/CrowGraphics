@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Kara/Core/Core.hpp"
 #include "Kara/UI/Component.hpp"
 
 #include <vector>
@@ -10,11 +11,8 @@ class ComponentManager {
 public:
   ComponentManager();
 
-  void OnUpdate();
-  void Render();
-
 private:
-  std::vector<Component *> mComponents;
+  std::vector<Core::Ref<Component>> mComponents;
 };
 } // namespace UI
 } // namespace Kara
