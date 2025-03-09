@@ -16,8 +16,8 @@ Application *Application::smInstance = nullptr;
 Application::Application() {
   Log::Logger::Init();
 
+  KARA_CORE_ASSERT(!smInstance, "Application should be a singleton !");
   smInstance = this;
-  KARA_CORE_ASSERT(smInstance, "Application should be a singleton !");
 
   mWindow.reset(Core::Window::Create());
 
