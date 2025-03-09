@@ -4,7 +4,7 @@
 
 namespace Kara {
 namespace UI {
-Component::Component(const Rect &aRect) : mRect{aRect} {}
+Component::Component(const Rect &aRect, const Params &aParams) : mRect{aRect} {}
 
 } // namespace UI
 } // namespace Kara

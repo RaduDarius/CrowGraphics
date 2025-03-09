@@ -8,7 +8,7 @@
 #include "Kara/Graphics/Command.hpp"
 #include "Kara/Layers/Layer.hpp"
 #include "Kara/Log/Logger.hpp"
-#include "Kara/UI/MainLayer.hpp"
+#include "Kara/UI/TestLayer.hpp"
 
 namespace Kara {
 Application *Application::smInstance = nullptr;
@@ -23,7 +23,7 @@ Application::Application() {
 
   mUILayer = new UI::UILayer();
   mLayerStack.PushOverlay(mUILayer);
-  mLayerStack.Push(new UI::MainLayer());
+  mLayerStack.Push(new UI::TestLayer());
 
   mWindow->SetEventCallback([&](Events::Event &e) { return OnEvent(e); });
 }
