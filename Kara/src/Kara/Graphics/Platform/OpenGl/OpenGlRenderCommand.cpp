@@ -14,8 +14,9 @@ void Command::Clear(const glm::vec4 &aColor) {
 }
 
 void Command::Draw(const Core::Ref<VertexArray> &aVertexArray) {
-  glDrawElements(GL_TRIANGLES, aVertexArray->GetIndexBuffer()->Count(),
-                 GL_UNSIGNED_INT, nullptr);
+  auto indexBuffer = aVertexArray->GetIndexBuffer();
+  const auto count = indexBuffer ? indexBuffer->Count() : 0;
+  glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 }
 
 } // namespace Graphics
