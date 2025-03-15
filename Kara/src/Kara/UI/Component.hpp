@@ -19,6 +19,10 @@ public:
   Component(const ComponentRef aParent, const Rect &aRect,
             const Params &aParams);
 
+  inline Core::Ref<Component> Self() {
+    return std::make_shared<Component>(*this);
+  }
+
   //! ComponentManager related APIs
   Core::Ref<RenderObject> GetRenderProp() { return mRenderProp; };
 
