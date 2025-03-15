@@ -6,6 +6,7 @@
 #include "Kara/Core/Core.hpp"
 #include "Kara/Core/InputManager.hpp"
 #include "Kara/Graphics/Command.hpp"
+#include "Kara/Graphics/Renderer.hpp"
 #include "Kara/Log/Logger.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -20,9 +21,7 @@ TestLayer::TestLayer()
           0.0f, static_cast<float>(Application::Get()->GetWindow()->GetWidth()),
           static_cast<float>(Application::Get()->GetWindow()->GetHeight()),
           0.0f}} {
-  mRenderer.reset(new Graphics::Renderer(Graphics::RenderApi::OpenGl));
-
-  mVertexArray = mRenderer->CreateVertexArray();
+  mVertexArray = Graphics::Renderer::CreateVertexArray();
 
   float vertices[] = {// Position 0
                       0.0f, 0.0f, 0.0f,
@@ -42,7 +41,8 @@ TestLayer::TestLayer()
                       0.0f, 1.0f};
 
   Core::Ref<Graphics::VertexBuffer> vertexBuffer;
-  vertexBuffer = mRenderer->CreateVertexBuffer(vertices, sizeof(vertices));
+  vertexBuffer =
+      Graphics::Renderer::CreateVertexBuffer(vertices, sizeof(vertices));
 
   Graphics::BufferLayout layout = {
       {Graphics::BufferElementType::Float3, "inPosition"},
@@ -54,14 +54,15 @@ TestLayer::TestLayer()
 
   uint32_t indeces[] = {0, 1, 2, 2, 3, 0};
   Core::Ref<Graphics::IndexBuffer> indexBuffer;
-  indexBuffer = mRenderer->CreateIndexBuffer(indeces, sizeof(indeces));
+  indexBuffer = Graphics::Renderer::CreateIndexBuffer(indeces, sizeof(indeces));
   mVertexArray->AddIndexBuffer(indexBuffer);
 
-  mShader = mRenderer->CreateShader(Graphics::Shader::Type::Basic);
-  mTextureShader = mRenderer->CreateShader(Graphics::Shader::Type::Texture);
+  mShader = Graphics::Renderer::CreateShader(Graphics::Shader::Type::Basic);
+  mTextureShader =
+      Graphics::Renderer::CreateShader(Graphics::Shader::Type::Texture);
 
-  mTexture =
-      mRenderer->CreateTexture("../Kara/assets/textures/texture_test_2.jpg");
+  mTexture = Graphics::Renderer::CreateTexture(
+      "../Kara/assets/textures/texture_test_2.jpg");
 }
 
 void TestLayer::OnRender() {

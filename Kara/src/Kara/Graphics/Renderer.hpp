@@ -14,16 +14,16 @@ enum class RenderApi : uint8_t { None, OpenGl };
 
 class Renderer {
 public:
-  Renderer(const RenderApi aRenderApi);
-
-  Core::Ref<VertexArray> CreateVertexArray();
-  Core::Ref<IndexBuffer> CreateIndexBuffer(uint32_t *aIndeces, uint32_t aSize);
-  Core::Ref<VertexBuffer> CreateVertexBuffer(float *aVertices, uint32_t aSize);
-  Core::Ref<Shader> CreateShader(const Shader::Type aShaderType);
-  Core::Ref<Texture> CreateTexture(const std::string_view &aPath);
+  static Core::Ref<VertexArray> CreateVertexArray();
+  static Core::Ref<IndexBuffer> CreateIndexBuffer(uint32_t *aIndeces,
+                                                  uint32_t aSize);
+  static Core::Ref<VertexBuffer> CreateVertexBuffer(float *aVertices,
+                                                    uint32_t aSize);
+  static Core::Ref<Shader> CreateShader(const Shader::Type aShaderType);
+  static Core::Ref<Texture> CreateTexture(const std::string_view &aPath);
 
 private:
-  RenderApi mRenderApi;
+  static RenderApi mRenderApi;
 };
 } // namespace Graphics
 } // namespace Kara

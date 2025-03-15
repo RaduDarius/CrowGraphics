@@ -2,6 +2,8 @@
 
 #include "Component.hpp"
 
+#include "Kara/Graphics/Renderer.hpp"
+
 namespace Kara {
 namespace UI {
 Component::Component(const ComponentRef aParent, const Rect &aRect,
@@ -35,11 +37,25 @@ void Component::SetupRenderPrimitives() {
       x + width, y + height, 0.0f, x,         y + height, 0.0f,
   };
 
-  mRenderProp->Indeces = {0, 1, 2, 2, 3, 0};
+  mRenderProp->VertexArray = Graphics::Renderer::CreateVertexArray();
 
-  mRenderProp->Layout = {
+  const auto vertexBuffer = Graphics::Renderer::CreateVertexBuffer(
+      mRenderProp->Vertices.data(),
+      mRenderProp->Vertices.size() * sizeof(float));
+
+  Graphics::BufferLayout layout = {
       {Graphics::BufferElementType::Float3, "inPosition"},
   };
+  vertexBuffer->SetLayout(layout);
+
+  mRenderProp->VertexArray->AddVertexBuffer(vertexBuffer);
+
+  mRenderProp->Indeces = {0, 1, 2, 2, 3, 0};
+  Core::Ref<Graphics::IndexBuffer> indexBuffer;
+  indexBuffer = Graphics::Renderer::CreateIndexBuffer(
+      mRenderProp->Indeces.data(),
+      mRenderProp->Indeces.size() * sizeof(uint32_t));
+  mRenderProp->VertexArray->AddIndexBuffer(indexBuffer);
 }
 
 } // namespace UI

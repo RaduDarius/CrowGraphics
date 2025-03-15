@@ -27,6 +27,9 @@ public:
 
   inline void SetParent(const ComponentRef aParent) { mParent = aParent; }
 
+  //! @brief Graphics primitives APIs
+  inline void SetColor(const glm::vec4 &aColor) { mRenderProp->Color = aColor; }
+
 private:
   void SetupRenderPrimitives();
 

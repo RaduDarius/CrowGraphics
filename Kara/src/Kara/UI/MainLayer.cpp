@@ -4,6 +4,7 @@
 
 #include "Kara/Application.hpp"
 #include "Kara/Graphics/Command.hpp"
+#include "Kara/Graphics/Renderer.hpp"
 #include "Kara/UI/ComponentManager.hpp"
 
 #include <glm/glm.hpp>
@@ -17,20 +18,19 @@ MainLayer::MainLayer()
           (float)Application::Get()->GetWindowSize().Height, 0.0f}} {
   ComponentManager::Get()->CreateRootComponent();
 
-  mRenderer.reset(new Graphics::Renderer(Graphics::RenderApi::OpenGl));
-  mShader = mRenderer->CreateShader(Graphics::Shader::Type::Basic);
+  mShader = Graphics::Renderer::CreateShader(Graphics::Shader::Type::Basic);
 }
 
 void MainLayer::OnUpdate() {
-  for (const auto &prop : mRenderProps) {
-    prop.VertexArray->Bind();
+  for (const auto &renderObject : ComponentManager::GetRenderObjects()) {
+    renderObject->VertexArray->Bind();
 
     mShader->Bind();
     mShader->UploadUniformMat4("uVP", mCamera.GetVPMat());
     mShader->UploadUniformMat4("uModel", glm::mat4(1.0f));
-    mShader->UploadUniformVec4("uColor", prop.Color);
+    mShader->UploadUniformVec4("uColor", renderObject->Color);
 
-    Graphics::Command::Draw(prop.VertexArray);
+    Graphics::Command::Draw(renderObject->VertexArray);
   }
 }
 

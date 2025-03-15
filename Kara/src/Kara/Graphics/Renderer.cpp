@@ -14,7 +14,7 @@
 
 namespace Kara {
 namespace Graphics {
-Renderer::Renderer(const RenderApi aRenderApi) : mRenderApi{aRenderApi} {}
+RenderApi Renderer::mRenderApi = RenderApi::OpenGl;
 
 Core::Ref<VertexArray> Renderer::CreateVertexArray() {
   switch (mRenderApi) {
