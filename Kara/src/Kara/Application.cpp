@@ -21,6 +21,7 @@ Application::Application() {
   smInstance = this;
 
   mWindow.reset(Core::Window::Create());
+  Graphics::Command::Init();
 
   mUILayer = new UI::UILayer();
   mLayerStack.PushOverlay(mUILayer);

@@ -13,7 +13,6 @@ namespace UI {
 class Component {
 public:
   using ComponentRef = Core::Ref<Component>;
-
   struct Params {};
 
   Component(const ComponentRef aParent, const Rect &aRect,
@@ -24,7 +23,7 @@ public:
   }
 
   //! ComponentManager related APIs
-  Core::Ref<RenderObject> GetRenderProp() { return mRenderProp; };
+  const Core::Ref<RenderObject> &GetRenderProp() const { return mRenderProp; };
 
   void AddChild(const ComponentRef aChild);
   void RemoveChild(const ComponentRef aChild);
@@ -32,7 +31,14 @@ public:
   inline void SetParent(const ComponentRef aParent) { mParent = aParent; }
 
   //! @brief Graphics primitives APIs
-  inline void SetColor(const glm::vec4 &aColor) { mRenderProp->Color = aColor; }
+  inline void SetColor(const glm::vec4 &aColor) {
+    mRenderProp->Material->SetColor(aColor);
+  }
+
+protected:
+  void SetRenderPropMaterial(const Core::Ref<Graphics::Material> &aMaterial) {
+    mRenderProp->Material = aMaterial;
+  }
 
 private:
   void SetupRenderPrimitives();

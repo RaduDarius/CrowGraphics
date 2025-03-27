@@ -10,6 +10,8 @@
 namespace Kara {
 namespace Graphics {
 struct Command {
+  static void Init();
+
   static void Clear(const glm::vec4 &aColor);
   static void Draw(const Core::Ref<VertexArray> &aVertexArray);
 };

@@ -32,10 +32,10 @@ void Component::SetupRenderPrimitives() {
   const float width = static_cast<float>(mRect.Width);
   const float height = static_cast<float>(mRect.Height);
 
-  mRenderProp->Vertices = {
-      x,         y,          0.0f, x + width, y,          0.0f,
-      x + width, y + height, 0.0f, x,         y + height, 0.0f,
-  };
+  mRenderProp->Vertices = {x,         y,          0.0f, 0.0f, 0.0f,
+                           x + width, y,          0.0f, 1.0f, 0.0f,
+                           x + width, y + height, 0.0f, 1.0f, 1.0f,
+                           x,         y + height, 0.0f, 0.0f, 1.0f};
 
   mRenderProp->VertexArray = Graphics::Renderer::CreateVertexArray();
 
@@ -45,6 +45,7 @@ void Component::SetupRenderPrimitives() {
 
   Graphics::BufferLayout layout = {
       {Graphics::BufferElementType::Float3, "inPosition"},
+      {Graphics::BufferElementType::Float2, "inTextCoord"},
   };
   vertexBuffer->SetLayout(layout);
 
@@ -56,6 +57,10 @@ void Component::SetupRenderPrimitives() {
       mRenderProp->Indeces.data(),
       mRenderProp->Indeces.size() * sizeof(uint32_t));
   mRenderProp->VertexArray->AddIndexBuffer(indexBuffer);
+
+  static constexpr glm::vec4 DefaultBackgroundColor{1.0f, 1.0f, 1.0f, 1.0f};
+  mRenderProp->Material =
+      std::make_shared<Graphics::Material>(DefaultBackgroundColor);
 }
 
 } // namespace UI

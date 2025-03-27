@@ -3,6 +3,7 @@
 #include "Kara/Core/Core.hpp"
 #include "Kara/Graphics/VertexArray.hpp"
 #include "Kara/Graphics/VertexBuffer.hpp"
+#include "Kara/Graphics/Material.hpp"
 
 #include <glm/glm.hpp>
 
@@ -15,7 +16,7 @@ struct RenderObject {
   std::vector<uint32_t> Indeces;
   Core::Ref<Graphics::VertexArray> VertexArray;
 
-  glm::vec4 Color{1.0f, 1.0f, 1.0f, 1.0f};
+Core::Ref<Graphics::Material> Material;
 };
 } // namespace UI
 } // namespace Kara

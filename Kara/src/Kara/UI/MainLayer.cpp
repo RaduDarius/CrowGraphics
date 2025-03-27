@@ -17,18 +17,16 @@ MainLayer::MainLayer()
           0.0f, (float)Application::Get()->GetWindowSize().Width,
           (float)Application::Get()->GetWindowSize().Height, 0.0f}} {
   ComponentManager::Get()->CreateRootComponent();
-
-  mShader = Graphics::Renderer::CreateShader(Graphics::Shader::Type::Basic);
 }
 
 void MainLayer::OnUpdate() {
   for (const auto &renderObject : ComponentManager::GetRenderObjects()) {
     renderObject->VertexArray->Bind();
 
-    mShader->Bind();
-    mShader->UploadUniformMat4("uVP", mCamera.GetVPMat());
-    mShader->UploadUniformMat4("uModel", glm::mat4(1.0f));
-    mShader->UploadUniformVec4("uColor", renderObject->Color);
+    renderObject->Material->Bind();
+    const auto &shader = renderObject->Material->GetShader();
+    shader->UploadUniformMat4("uVP", mCamera.GetVPMat());
+    shader->UploadUniformMat4("uModel", glm::mat4(1.0f));
 
     Graphics::Command::Draw(renderObject->VertexArray);
   }

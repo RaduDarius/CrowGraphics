@@ -8,6 +8,11 @@
 
 namespace Kara {
 namespace Graphics {
+void Command::Init() {
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+}
+
 void Command::Clear(const glm::vec4 &aColor) {
   glClearColor(aColor.r, aColor.g, aColor.b, aColor.a);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

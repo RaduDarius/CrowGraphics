@@ -3,6 +3,7 @@
 #include "Renderer.hpp"
 
 #include "Kara/Graphics/BufferLayout.hpp"
+#include "Kara/Graphics/Command.hpp"
 #include "Kara/Graphics/Platform/OpenGl/OpenGlIndexBuffer.hpp"
 #include "Kara/Graphics/Platform/OpenGl/OpenGlShader.hpp"
 #include "Kara/Graphics/Platform/OpenGl/OpenGlTexture.hpp"

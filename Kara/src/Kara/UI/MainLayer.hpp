@@ -2,7 +2,6 @@
 
 #include "Kara/Core/Core.hpp"
 #include "Kara/Graphics/Camera.hpp"
-#include "Kara/Graphics/Shader.hpp"
 #include "Kara/Layers/Layer.hpp"
 
 #include <glm/glm.hpp>
@@ -18,8 +17,6 @@ public:
 private:
   //! Graphics
   Graphics::Camera mCamera;
-
-  Core::Ref<Graphics::Shader> mShader;
 };
 } // namespace UI
 } // namespace Kara
