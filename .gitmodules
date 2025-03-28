@@ -13,3 +13,6 @@
 [submodule "Kara/vendor/stb_image"]
 	path = Kara/vendor/stb_image
 	url = https://github.com/nothings/stb.git
+[submodule "Kara/vendor/freetype"]
+	path = Kara/vendor/freetype
+	url = https://github.com/RaduDarius/freetype
