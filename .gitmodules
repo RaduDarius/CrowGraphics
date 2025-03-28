@@ -1,9 +1,6 @@
 [submodule "Kara/vendor/spdlog"]
 	path = Kara/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
-[submodule "Kara/vender/GLFW"]
-	path = Kara/vender/GLFW
-	url = https://github.com/RaduDarius/glfw.git
 [submodule "Kara/vendor/GLFW"]
 	path = Kara/vendor/GLFW
 	url = https://github.com/RaduDarius/glfw.git
@@ -16,6 +13,3 @@
 [submodule "Kara/vendor/stb_image"]
 	path = Kara/vendor/stb_image
 	url = https://github.com/nothings/stb.git
-[submodule "Kara/vendor/freetype"]
-	path = Kara/vendor/freetype
-	url = https://github.com/RaduDarius/freetype.git
