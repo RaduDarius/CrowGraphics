@@ -22,15 +22,12 @@ MainLayer::MainLayer()
 void MainLayer::OnUpdate() {
   for (const auto &renderObject : ComponentManager::GetRenderObjects()) {
     renderObject->VertexArray->Bind();
-
     renderObject->Material->Bind();
     const auto &shader = renderObject->Material->GetShader();
     shader->UploadUniformMat4("uVP", mCamera.GetVPMat());
     shader->UploadUniformMat4("uModel", glm::mat4(1.0f));
 
     Graphics::Command::Draw(renderObject->VertexArray);
-
-    renderObject->Material->Unbind();
   }
 }
 

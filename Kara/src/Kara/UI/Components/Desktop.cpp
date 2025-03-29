@@ -13,16 +13,19 @@ Desktop::Desktop(const ComponentRef aParent, const Rect &aRect,
                  const Params &aParams)
     : Component{aParent, aRect, aParams} {
 
-  // const auto component1 =
-  //    ComponentManager::CreateComponent<Component>(Self(), {0, 0, 100, 50});
-  // component1->SetColor({1.0f, 0.0f, 0.0f, 1.0f});
+  Rect rect{0, 0, 100, 150};
+  const auto component1 =
+      ComponentManager::CreateComponent<Component>(Self(), rect);
+  component1->SetColor({1.0f, 0.0f, 0.0f, 1.0f});
 
+  rect.Y += rect.Height;
   const auto text = ComponentManager::CreateComponent<Text>(
-      Self(), {0, 60, 100, 50}, "Ana", Font::Handle::Arial,
-      Graphics::Color{0.0f, 0.0f, 0.0f, 1.0f});
+      Self(), rect, "Hello Goby", Font::Handle::Arial,
+      Graphics::Color{1.0f, 0.0f, 0.0f, 1.0f});
 
-  // const auto image = ComponentManager::CreateComponent<Image>(
-  //    Self(), {0, 120, 1000, 500}, Kara::Image::Handle::Texture1);
+  rect.Y += rect.Height;
+  const auto image = ComponentManager::CreateComponent<Image>(
+      Self(), rect, Kara::Image::Handle::Texture1);
 }
 
 } // namespace UI

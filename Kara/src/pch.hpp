@@ -9,6 +9,7 @@
 #include <fstream>
 #include <initializer_list>
 #include <iostream>
+#include <map>
 #include <memory>
 #include <sstream>
 #include <string>

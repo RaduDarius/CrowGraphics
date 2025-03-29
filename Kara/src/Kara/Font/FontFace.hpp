@@ -15,6 +15,7 @@ public:
 
   void Load(const char aCharacter);
 
+  uint32_t GetPixelHeight() const { return mPixelHeight; }
   void SetPixelSize(const uint32_t aPixelWidth, const uint32_t aPixelHeight);
 
 private:

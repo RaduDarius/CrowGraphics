@@ -9,6 +9,8 @@ namespace Kara {
 namespace Graphics {
 OpenGlTexture::OpenGlTexture(const std::string_view &aPath) : Texture{aPath} {
   glGenTextures(1, &mRenderId);
+  glActiveTexture(GL_TEXTURE1);
+  glBindTexture(GL_TEXTURE_2D, mRenderId);
 
   int width, height, nrChannels;
   unsigned char *data =
@@ -20,7 +22,6 @@ OpenGlTexture::OpenGlTexture(const std::string_view &aPath) : Texture{aPath} {
 
   stbi_image_free(data);
 
-  glBindTexture(GL_TEXTURE_2D, mRenderId);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -30,7 +31,7 @@ OpenGlTexture::OpenGlTexture(const std::string_view &aPath) : Texture{aPath} {
 OpenGlTexture::~OpenGlTexture() { glDeleteTextures(1, &mRenderId); }
 
 void OpenGlTexture::Bind() const {
-  glActiveTexture(GL_TEXTURE0);
+  glActiveTexture(GL_TEXTURE1);
   glBindTexture(GL_TEXTURE_2D, mRenderId);
 }
 

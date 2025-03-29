@@ -45,6 +45,9 @@ protected:
     mRenderProp->Material = aMaterial;
   }
 
+  // Render Properties
+  Core::Ref<RenderObject> mRenderProp;
+
 private:
   void SetupRenderPrimitives();
 
@@ -54,9 +57,6 @@ private:
 
   // Data Properties
   Rect mRect;
-
-  // Render Properties
-  Core::Ref<RenderObject> mRenderProp;
 };
 } // namespace UI
 } // namespace Kara

@@ -1,10 +1,13 @@
 #pragma once
 
 #include "Kara/Core/Types.hpp"
-#include "Kara/Font/FontFace.hpp"
+#include "Kara/Font/Types.hpp"
 #include "Kara/Graphics/FontTexture.hpp"
 
 namespace Kara {
+namespace Font {
+class FontFace;
+}
 namespace Graphics {
 class OpenGlFontTexture : public FontTexture {
 public:
