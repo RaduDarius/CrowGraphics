@@ -10,7 +10,7 @@ namespace Kara {
 namespace UI {
 Text::Text(const ComponentRef aParent, const Rect &aRect, const Params &aParams)
     : Component{aParent, aRect, {}}, mText{aParams.mText},
-      mFont{aParams.mFontHandle} {
+      mFont{aParams.mFontHandle}, mTextColor{aParams.mTextColor} {
   SetupRenderPrimitives();
 }
 
@@ -19,6 +19,7 @@ void Text::SetupRenderPrimitives() {
 
   mFont.SetPixelSize(0, 64);
   const auto texture = Graphics::Renderer::CreateFontTexture(mFont);
+  texture->SetColor(mTextColor);
   const auto fontHeight = texture->GetFontHeight();
   auto glyphs = texture->GetGlyphs();
 
