@@ -5,6 +5,7 @@
 #include "Kara/Application.hpp"
 #include "Kara/Core/Core.hpp"
 #include "Kara/Core/InputManager.hpp"
+#include "Kara/Font/FontFace.hpp"
 #include "Kara/Graphics/Command.hpp"
 #include "Kara/Graphics/Renderer.hpp"
 #include "Kara/Log/Logger.hpp"
@@ -60,9 +61,12 @@ TestLayer::TestLayer()
   mShader = Graphics::Renderer::CreateShader(Graphics::Shader::Type::Basic);
   mTextureShader =
       Graphics::Renderer::CreateShader(Graphics::Shader::Type::Texture);
+  mFontShader = Graphics::Renderer::CreateShader(Graphics::Shader::Type::Font);
 
-  mTexture = Graphics::Renderer::CreateTexture(
-      "../Kara/assets/textures/texture_test_2.jpg");
+  // mTexture = Graphics::Renderer::CreateTexture(
+  //    "../Kara/assets/textures/texture_test_2.jpg");
+  // mTexture->Unbind();
+  mFontTexture = Graphics::Renderer::CreateFontTexture(Font::Handle::Arial);
 }
 
 void TestLayer::OnRender() {
@@ -120,16 +124,21 @@ void TestLayer::OnUpdate() {
       glm::rotate(transform, glm::radians(mRotation), glm::vec3(0, 0, 1));
   transform = glm::translate(transform, -mCenter);
 
-  mTexture->Bind();
-  mTextureShader->Bind();
-  mTextureShader->UploadUniformMat4("uVP", mCamera.GetVPMat());
-  mTextureShader->UploadUniformMat4("uModel", transform);
-  mTextureShader->UploadUniformInt("uTexture", 1);
+  mFontTexture->Bind();
+  mFontShader->Bind();
+  mFontShader->UploadUniformMat4("uVP", mCamera.GetVPMat());
+  mFontShader->UploadUniformMat4("uModel", transform);
+  mFontShader->UploadUniformInt("uTexture", 0);
+  mFontShader->UploadUniformVec4("uTextColor",
+                                 glm::vec4(0.0f, 1.0f, 0.0f, .5f));
 
   // mTextureShader->UploadUniformVec4("uColor", mColor);
 
   mVertexArray->Bind();
   Graphics::Command::Draw(mVertexArray);
+
+  mFontShader->Unbind();
+  mFontTexture->Unbind();
 }
 
 } // namespace UI

@@ -2,7 +2,9 @@
 
 #include "Image.hpp"
 
+#include "Kara/Graphics/Material.hpp"
 #include "Kara/Graphics/Renderer.hpp"
+#include "Kara/Graphics/Shader.hpp"
 
 namespace Kara {
 namespace UI {
@@ -13,9 +15,9 @@ Image::Image(const ComponentRef aParent, const Rect &aRect,
 }
 
 void Image::SetupRenderPrimitives() {
-  SetRenderPropMaterial(
-      std::make_shared<Graphics::Material>(Graphics::Renderer::CreateTexture(
-          Kara::Image::GetImagePath(mImgHandle))));
+  auto texture =
+      Graphics::Renderer::CreateTexture(Kara::Image::GetImagePath(mImgHandle));
+  SetRenderPropMaterial(std::make_shared<Graphics::Material>(texture));
 }
 
 } // namespace UI

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Kara/Core/Core.hpp"
+#include "Kara/Core/Types.hpp"
 #include "Kara/UI/RenderObject.hpp"
 #include "Kara/UI/Utils.hpp"
 
@@ -21,6 +22,10 @@ public:
   inline Core::Ref<Component> Self() {
     return std::make_shared<Component>(*this);
   }
+
+  //! Public APIs
+  inline Rect GetRect() const { return mRect; }
+  inline Core::Size GetSize() const { return mRect.GetSize(); }
 
   //! ComponentManager related APIs
   const Core::Ref<RenderObject> &GetRenderProp() const { return mRenderProp; };

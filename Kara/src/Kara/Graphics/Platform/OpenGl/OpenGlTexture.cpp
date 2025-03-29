@@ -29,7 +29,10 @@ OpenGlTexture::OpenGlTexture(const std::string_view &aPath) : Texture{aPath} {
 
 OpenGlTexture::~OpenGlTexture() { glDeleteTextures(1, &mRenderId); }
 
-void OpenGlTexture::Bind() const { glBindTexture(GL_TEXTURE_2D, mRenderId); }
+void OpenGlTexture::Bind() const {
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, mRenderId);
+}
 
 void OpenGlTexture::Unbind() const { glBindTexture(GL_TEXTURE_2D, 0); }
 

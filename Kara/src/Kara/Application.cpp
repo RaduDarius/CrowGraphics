@@ -5,6 +5,7 @@
 #include "Kara/Events/Dispatcher.hpp"
 #include "Kara/Events/Event.hpp"
 #include "Kara/Events/WindowEvent.hpp"
+#include "Kara/Font/FontManager.hpp"
 #include "Kara/Graphics/Command.hpp"
 #include "Kara/Layers/Layer.hpp"
 #include "Kara/Log/Logger.hpp"
@@ -22,6 +23,7 @@ Application::Application() {
 
   mWindow.reset(Core::Window::Create());
   Graphics::Command::Init();
+  Font::FontManager::Init();
 
   mUILayer = new UI::UILayer();
   mLayerStack.PushOverlay(mUILayer);

@@ -11,6 +11,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 include "Kara/vendor/GLFW"
 include "Kara/vendor/GLAD"
 include "Kara/vendor/imgui"
+include "Kara/vendor/freetype"
 
 -- Project: Kara
 project "Kara"
@@ -35,6 +36,7 @@ project "Kara"
         "%{prj.name}/vendor/imgui", 
         "%{prj.name}/vendor/glm", 
         "%{prj.name}/vendor/stb_image", 
+        "%{prj.name}/vendor/freetype/include", 
         "%{prj.name}/src" 
     }
     
@@ -42,7 +44,8 @@ project "Kara"
         "GLFW", 
         "GLAD", 
         "imgui",
-        "opengl32.lib" 
+        "opengl32.lib",
+        "freetype"
      }
 
     filter "system:windows"
@@ -78,7 +81,8 @@ project "Sandbox"
     includedirs { 
         "Kara/vendor/spdlog/include", 
         "Kara/src", 
-        "Kara/vendor/glm" 
+        "Kara/vendor/glm",
+        "Kara/vendor/freetype/include", 
     }
 
     links { "Kara" }

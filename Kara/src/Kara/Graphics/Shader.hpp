@@ -8,7 +8,7 @@ namespace Kara {
 namespace Graphics {
 class Shader {
 public:
-  enum class Type { Basic, Texture };
+  enum class Type { Basic, Texture, Font };
 
   Shader(const Type aType) : mShaderType{aType} {}
   virtual ~Shader() = default;

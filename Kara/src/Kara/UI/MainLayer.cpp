@@ -29,6 +29,8 @@ void MainLayer::OnUpdate() {
     shader->UploadUniformMat4("uModel", glm::mat4(1.0f));
 
     Graphics::Command::Draw(renderObject->VertexArray);
+
+    renderObject->Material->Unbind();
   }
 }
 

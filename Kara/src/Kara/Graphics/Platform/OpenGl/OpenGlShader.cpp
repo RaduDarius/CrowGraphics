@@ -16,6 +16,9 @@ constexpr auto BasicFragmentShaderPath{"../Kara/assets/shaders/basic.frag"};
 
 constexpr auto TextureVertexShaderPath{"../Kara/assets/shaders/texture.vert"};
 constexpr auto TextureFragmentShaderPath{"../Kara/assets/shaders/texture.frag"};
+
+constexpr auto FontVertexShaderPath{"../Kara/assets/shaders/font.vert"};
+constexpr auto FontFragmentShaderPath{"../Kara/assets/shaders/font.frag"};
 } // namespace
 
 OpenGlShader::OpenGlShader(const Type aType) : Shader{aType} {
@@ -81,6 +84,9 @@ unsigned int OpenGlShader::CreateShader(const std::filesystem::path &aPath,
 std::pair<std::string_view, std::string_view>
 OpenGlShader::GetShaderPaths() const {
   switch (GetType()) {
+  case Type::Font:
+    return {FontVertexShaderPath, FontFragmentShaderPath};
+
   case Type::Texture:
     return {TextureVertexShaderPath, TextureFragmentShaderPath};
 

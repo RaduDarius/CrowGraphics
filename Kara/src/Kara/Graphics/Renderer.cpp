@@ -4,6 +4,7 @@
 
 #include "Kara/Graphics/BufferLayout.hpp"
 #include "Kara/Graphics/Command.hpp"
+#include "Kara/Graphics/Platform/OpenGl/OpenGlFontTexture.hpp"
 #include "Kara/Graphics/Platform/OpenGl/OpenGlIndexBuffer.hpp"
 #include "Kara/Graphics/Platform/OpenGl/OpenGlShader.hpp"
 #include "Kara/Graphics/Platform/OpenGl/OpenGlTexture.hpp"
@@ -92,6 +93,22 @@ Core::Ref<Texture> Renderer::CreateTexture(const std::string_view &aPath) {
   case RenderApi::OpenGl:
     return std::make_shared<OpenGlTexture>(aPath);
     break;
+
+  default:
+    KARA_CORE_ERROR("Unsupported render API");
+    break;
+  }
+  return nullptr;
+}
+
+Core::Ref<FontTexture>
+Renderer::CreateFontTexture(const Font::FontFace &aFont) {
+  switch (mRenderApi) {
+  case RenderApi::None:
+    break;
+
+  case RenderApi::OpenGl:
+    return std::make_shared<OpenGlFontTexture>(aFont);
 
   default:
     KARA_CORE_ERROR("Unsupported render API");

@@ -24,7 +24,7 @@ public:
   static Application *Get() { return smInstance; }
 
   Core::Window *GetWindow() const { return mWindow.get(); }
-  CoreTypes::Size GetWindowSize() const { return mWindow->GetSize(); }
+  Core::Size GetWindowSize() const { return mWindow->GetSize(); }
 
   void OnEvent(Events::Event &aEvent);
 

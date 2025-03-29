@@ -14,7 +14,7 @@ public:
 
   void OnUpdate() override;
 
-  CoreTypes::Size GetSize() const override;
+  Core::Size GetSize() const override;
   uint32_t GetWidth() const override;
   uint32_t GetHeight() const override;
   void *GetNativeWindow() const override;
@@ -32,7 +32,7 @@ private:
   // Data
   struct WindowData {
     std::string Title;
-    CoreTypes::Size Size;
+    Core::Size Size;
     bool VSync{false};
 
     EventCallback EventCallback;

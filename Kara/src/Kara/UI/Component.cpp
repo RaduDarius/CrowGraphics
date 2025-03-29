@@ -43,17 +43,15 @@ void Component::SetupRenderPrimitives() {
       mRenderProp->Vertices.data(),
       mRenderProp->Vertices.size() * sizeof(float));
 
-  Graphics::BufferLayout layout = {
+  vertexBuffer->SetLayout({
       {Graphics::BufferElementType::Float3, "inPosition"},
       {Graphics::BufferElementType::Float2, "inTextCoord"},
-  };
-  vertexBuffer->SetLayout(layout);
+  });
 
   mRenderProp->VertexArray->AddVertexBuffer(vertexBuffer);
 
   mRenderProp->Indeces = {0, 1, 2, 2, 3, 0};
-  Core::Ref<Graphics::IndexBuffer> indexBuffer;
-  indexBuffer = Graphics::Renderer::CreateIndexBuffer(
+  auto indexBuffer = Graphics::Renderer::CreateIndexBuffer(
       mRenderProp->Indeces.data(),
       mRenderProp->Indeces.size() * sizeof(uint32_t));
   mRenderProp->VertexArray->AddIndexBuffer(indexBuffer);

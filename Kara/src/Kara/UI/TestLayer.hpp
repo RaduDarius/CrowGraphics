@@ -3,6 +3,7 @@
 #include "Kara/Core/Core.hpp"
 #include "Kara/Events/Event.hpp"
 #include "Kara/Graphics/Camera.hpp"
+#include "Kara/Graphics/FontTexture.hpp"
 #include "Kara/Graphics/Shader.hpp"
 #include "Kara/Graphics/Texture.hpp"
 #include "Kara/Graphics/VertexArray.hpp"
@@ -24,7 +25,9 @@ private:
 
   Core::Ref<Graphics::Shader> mShader;
   Core::Ref<Graphics::Shader> mTextureShader;
+  Core::Ref<Graphics::Shader> mFontShader;
   Core::Ref<Graphics::Texture> mTexture;
+  Core::Ref<Graphics::FontTexture> mFontTexture;
 
   Core::Ref<Graphics::VertexArray> mVertexArray;
 

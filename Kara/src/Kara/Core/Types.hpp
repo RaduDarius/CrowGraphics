@@ -4,7 +4,7 @@
 #include <string>
 
 namespace Kara {
-namespace CoreTypes {
+namespace Core {
 struct PixelPoint {
   uint32_t X;
   uint32_t Y;
@@ -31,7 +31,7 @@ struct Size {
   }
 };
 
-} // namespace CoreTypes
+} // namespace Core
 
 struct Point {
   float x;

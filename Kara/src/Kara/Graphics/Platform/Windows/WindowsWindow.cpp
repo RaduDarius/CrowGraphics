@@ -50,7 +50,7 @@ void WindowsWindow::OnUpdate() {
   ContextSwapBuffers();
 }
 
-CoreTypes::Size WindowsWindow::GetSize() const { return mData.Size; }
+Core::Size WindowsWindow::GetSize() const { return mData.Size; }
 
 uint32_t WindowsWindow::GetWidth() const { return mData.Size.Width; }
 

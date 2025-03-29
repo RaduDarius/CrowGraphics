@@ -11,11 +11,11 @@ namespace Kara {
 namespace Core {
 struct WindowProps {
   WindowProps() = default;
-  WindowProps(const std::string aTitle, const CoreTypes::Size aSize)
+  WindowProps(const std::string aTitle, const Core::Size aSize)
       : Title{aTitle}, Size{aSize} {}
 
   std::string Title{"Window app"};
-  CoreTypes::Size Size{1280, 720};
+  Core::Size Size{1280, 720};
 };
 
 class Window {
@@ -26,7 +26,7 @@ public:
 
   virtual void OnUpdate() = 0;
 
-  virtual CoreTypes::Size GetSize() const = 0;
+  virtual Core::Size GetSize() const = 0;
   virtual uint32_t GetWidth() const = 0;
   virtual uint32_t GetHeight() const = 0;
   virtual void *GetNativeWindow() const = 0;

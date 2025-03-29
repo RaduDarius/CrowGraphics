@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Kara/Core/Types.hpp"
+#include "Kara/Font/FontFace.hpp"
+#include "Kara/Graphics/FontTexture.hpp"
 #include "Kara/Graphics/IndexBuffer.hpp"
 #include "Kara/Graphics/Shader.hpp"
 #include "Kara/Graphics/Texture.hpp"
@@ -21,6 +24,7 @@ public:
                                                     uint32_t aSize);
   static Core::Ref<Shader> CreateShader(const Shader::Type aShaderType);
   static Core::Ref<Texture> CreateTexture(const std::string_view &aPath);
+  static Core::Ref<FontTexture> CreateFontTexture(const Font::FontFace &aFont);
 
 private:
   static RenderApi mRenderApi;
