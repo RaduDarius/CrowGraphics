@@ -39,9 +39,9 @@ void Component::SetupRenderPrimitives() {
 
   mRenderProp->VertexArray = Graphics::Renderer::CreateVertexArray();
 
+  const std::size_t verticesSize = mRenderProp->Vertices.size() * sizeof(float);
   const auto vertexBuffer = Graphics::Renderer::CreateVertexBuffer(
-      mRenderProp->Vertices.data(),
-      mRenderProp->Vertices.size() * sizeof(float));
+      mRenderProp->Vertices.data(), verticesSize);
 
   vertexBuffer->SetLayout({
       {Graphics::BufferElementType::Float3, "inPosition"},
@@ -51,9 +51,9 @@ void Component::SetupRenderPrimitives() {
   mRenderProp->VertexArray->AddVertexBuffer(vertexBuffer);
 
   mRenderProp->Indeces = {0, 1, 2, 2, 3, 0};
+  const std::size_t indecesSize = mRenderProp->Indeces.size() * sizeof(uint32_t);
   auto indexBuffer = Graphics::Renderer::CreateIndexBuffer(
-      mRenderProp->Indeces.data(),
-      mRenderProp->Indeces.size() * sizeof(uint32_t));
+      mRenderProp->Indeces.data(), indecesSize);
   mRenderProp->VertexArray->AddIndexBuffer(indexBuffer);
 
   static constexpr glm::vec4 DefaultBackgroundColor{1.0f, 1.0f, 1.0f, 1.0f};

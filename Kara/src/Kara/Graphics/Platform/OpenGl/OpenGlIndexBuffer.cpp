@@ -6,8 +6,8 @@
 
 namespace Kara {
 namespace Graphics {
-OpenGlIndexBuffer::OpenGlIndexBuffer(uint32_t *aIndeces, uint32_t aSize)
-    : mCount{aSize / sizeof(uint32_t)} {
+OpenGlIndexBuffer::OpenGlIndexBuffer(uint32_t *aIndeces, std::size_t aSize)
+    : mCount{static_cast<uint32_t>(aSize) / sizeof(uint32_t)} {
   glCreateBuffers(1, &mRendererId);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mRendererId);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, aSize, aIndeces, GL_STATIC_DRAW);

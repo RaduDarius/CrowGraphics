@@ -33,9 +33,9 @@ void Text::SetupRenderPrimitives() {
     const auto &glyph = glyphs[c];
 
     const float x = cursorX + glyph.Bearing.x;
-    const float y = rect.Y + (fontHeight - glyph.Bearing.y);
-    const float width = glyph.Size.x;
-    const float height = glyph.Size.y;
+    const float y = rect.Y + (static_cast<float>(fontHeight) - glyph.Bearing.y);
+    const auto width = glyph.Size.x;
+    const auto height = glyph.Size.y;
 
     float u0 = glyph.UvOffset.x;
     float v0 = glyph.UvOffset.y;

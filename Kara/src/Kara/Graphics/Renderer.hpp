@@ -19,9 +19,9 @@ class Renderer {
 public:
   static Core::Ref<VertexArray> CreateVertexArray();
   static Core::Ref<IndexBuffer> CreateIndexBuffer(uint32_t *aIndeces,
-                                                  uint32_t aSize);
+                                                  std::size_t aSize);
   static Core::Ref<VertexBuffer> CreateVertexBuffer(float *aVertices,
-                                                    uint32_t aSize);
+                                                    std::size_t aSize);
   static Core::Ref<Shader> CreateShader(const Shader::Type aShaderType);
   static Core::Ref<Texture> CreateTexture(const std::string_view &aPath);
   static Core::Ref<FontTexture> CreateFontTexture(const Font::FontFace &aFont);

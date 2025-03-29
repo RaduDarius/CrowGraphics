@@ -7,7 +7,7 @@ namespace Kara {
 namespace Graphics {
 class OpenGlVertexBuffer : public VertexBuffer {
 public:
-  OpenGlVertexBuffer(float *aVertices, uint32_t aSize);
+  OpenGlVertexBuffer(float *aVertices, std::size_t aSize);
   ~OpenGlVertexBuffer() override;
 
   void Bind() const override;

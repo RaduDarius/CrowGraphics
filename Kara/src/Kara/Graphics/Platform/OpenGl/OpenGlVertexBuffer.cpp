@@ -6,7 +6,7 @@
 
 namespace Kara {
 namespace Graphics {
-OpenGlVertexBuffer::OpenGlVertexBuffer(float *aVertices, uint32_t aSize) {
+OpenGlVertexBuffer::OpenGlVertexBuffer(float *aVertices, std::size_t aSize) {
   glCreateBuffers(1, &mRendererId);
   glBindBuffer(GL_ARRAY_BUFFER, mRendererId);
   glBufferData(GL_ARRAY_BUFFER, aSize, aVertices, GL_STATIC_DRAW);

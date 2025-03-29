@@ -6,7 +6,7 @@ namespace Kara {
 namespace Graphics {
 class OpenGlIndexBuffer : public IndexBuffer {
 public:
-  OpenGlIndexBuffer(uint32_t *aIndeces, uint32_t aSize);
+  OpenGlIndexBuffer(uint32_t *aIndeces, std::size_t aSize);
   ~OpenGlIndexBuffer() override;
 
   uint32_t Count() const override;

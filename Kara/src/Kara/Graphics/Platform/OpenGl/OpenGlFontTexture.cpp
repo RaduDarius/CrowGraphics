@@ -26,8 +26,9 @@ OpenGlFontTexture::OpenGlFontTexture(const Font::FontFace &aFontFace)
   static constexpr float AtlasHeight{512};
 
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, AtlasWidth, AtlasHeight, 0, GL_RED,
-               GL_UNSIGNED_BYTE, nullptr);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, static_cast<GLsizei>(AtlasWidth),
+               static_cast<GLsizei>(AtlasHeight), 0, GL_RED, GL_UNSIGNED_BYTE,
+               nullptr);
 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);

@@ -36,7 +36,7 @@ Core::Ref<VertexArray> Renderer::CreateVertexArray() {
 }
 
 Core::Ref<IndexBuffer> Renderer::CreateIndexBuffer(uint32_t *aIndeces,
-                                                   uint32_t aSize) {
+                                                   std::size_t aSize) {
   switch (mRenderApi) {
   case RenderApi::None:
     break;
@@ -53,7 +53,7 @@ Core::Ref<IndexBuffer> Renderer::CreateIndexBuffer(uint32_t *aIndeces,
 }
 
 Core::Ref<VertexBuffer> Renderer::CreateVertexBuffer(float *aVertices,
-                                                     uint32_t aSize) {
+                                                     std::size_t aSize) {
   switch (mRenderApi) {
   case RenderApi::None:
     break;
