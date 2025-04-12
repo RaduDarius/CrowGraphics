@@ -6,7 +6,7 @@
 #include "Kara/Events/Event.hpp"
 #include "Kara/Events/WindowEvent.hpp"
 #include "Kara/Font/FontManager.hpp"
-#include "Kara/Graphics/Command.hpp"
+#include "Kara/Graphics/RenderCommand.hpp"
 #include "Kara/Layers/Layer.hpp"
 #include "Kara/Log/Logger.hpp"
 #include "Kara/UI/MainLayer.hpp"
@@ -22,7 +22,7 @@ Application::Application() {
   smInstance = this;
 
   mWindow.reset(Core::Window::Create());
-  Graphics::Command::Init();
+  Graphics::RenderCommand::Init();
   Font::FontManager::Init();
 
   mUILayer = new UI::UILayer();
@@ -34,7 +34,7 @@ Application::Application() {
 
 void Application::Run() {
   while (mRunning) {
-    Graphics::Command::Clear({1.0f, 0.0f, 1.0f, 1.0f});
+    Graphics::RenderCommand::Clear({1.0f, 0.0f, 1.0f, 1.0f});
 
     mLayerStack.map([](Layers::Layer *aLayer) { aLayer->OnUpdate(); });
 

@@ -6,7 +6,7 @@
 #include "Kara/Core/Core.hpp"
 #include "Kara/Core/InputManager.hpp"
 #include "Kara/Font/FontFace.hpp"
-#include "Kara/Graphics/Command.hpp"
+#include "Kara/Graphics/RenderCommand.hpp"
 #include "Kara/Graphics/Renderer.hpp"
 #include "Kara/Log/Logger.hpp"
 
@@ -135,7 +135,7 @@ void TestLayer::OnUpdate() {
   // mTextureShader->UploadUniformVec4("uColor", mColor);
 
   mVertexArray->Bind();
-  Graphics::Command::Draw(mVertexArray);
+  Graphics::RenderCommand::Draw(mVertexArray);
 
   mFontShader->Unbind();
   mFontTexture->Unbind();

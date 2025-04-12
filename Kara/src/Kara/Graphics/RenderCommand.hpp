@@ -9,7 +9,7 @@
 
 namespace Kara {
 namespace Graphics {
-struct Command {
+struct RenderCommand {
   static void Init();
 
   static void Clear(const glm::vec4 &aColor);

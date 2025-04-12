@@ -3,7 +3,7 @@
 #include "MainLayer.hpp"
 
 #include "Kara/Application.hpp"
-#include "Kara/Graphics/Command.hpp"
+#include "Kara/Graphics/RenderCommand.hpp"
 #include "Kara/Graphics/Renderer.hpp"
 #include "Kara/UI/ComponentManager.hpp"
 
@@ -27,7 +27,7 @@ void MainLayer::OnUpdate() {
     shader->UploadUniformMat4("uVP", mCamera.GetVPMat());
     shader->UploadUniformMat4("uModel", glm::mat4(1.0f));
 
-    Graphics::Command::Draw(renderObject->VertexArray);
+    Graphics::RenderCommand::Draw(renderObject->VertexArray);
   }
 }
 
