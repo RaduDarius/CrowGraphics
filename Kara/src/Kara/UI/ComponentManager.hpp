@@ -28,17 +28,10 @@ public:
   //! @return a Ref to the created UI element for the consumer to make updates
   //! to it if needed.
   template <class C, typename... Args>
-  static Core::Ref<C> CreateComponent(const Core::Ref<Component> aParent,
-                                      const Rect &aRect, Args... aArgs) {
+  static C *CreateComponent(Component *aParent, const Rect &aRect,
+                            Args... aArgs) {
     return Get()->CreateComponentImpl<C>(aParent, aRect,
                                          std::forward<Args>(aArgs)...);
-  }
-
-  template <class C, typename... Args>
-  static Core::Ref<C> CreateComponent(const Component *aParent,
-                                      const Rect &aRect, Args... aArgs) {
-    return Get()->CreateComponentImpl<C>(std::make_shared<Component>(*aParent),
-                                         aRect, std::forward<Args>(aArgs)...);
   }
 
   void CreateRootComponent();
@@ -49,14 +42,15 @@ private:
   ComponentManager() = default;
 
   template <class C, typename... Args>
-  Core::Ref<C> CreateComponentImpl(const Core::Ref<Component> aParent,
-                                   const Rect &aRect, Args... aArgs) {
+  C *CreateComponentImpl(Component *aParent, const Rect &aRect, Args... aArgs) {
     static_assert(std::is_base_of<Component, C>::value,
                   "C must be an UI Component.");
 
     typename C::Params params{std::forward<Args>(aArgs)...};
-    auto component = std::make_shared<C>(aParent, aRect, params);
-    aParent->AddChild(component);
+    C *component = new C(aParent, aRect, params);
+    if (aParent) {
+      aParent->AddChild(component);
+    }
 
     return component;
   }

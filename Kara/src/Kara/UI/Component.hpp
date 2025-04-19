@@ -5,29 +5,28 @@
 #include "Kara/Graphics/Material.hpp"
 #include "Kara/UI/Utils.hpp"
 
+#include <functional>
 #include <vector>
 
 namespace Kara {
 namespace UI {
 class Component {
 public:
-  using ComponentRef = Core::Ref<Component>;
+  using ComponentRef = Component *;
+  using TraverseFunc = std::function<void(Component &)>;
   struct Params {};
 
   Component(const ComponentRef aParent, const Rect &aRect,
             const Params &aParams);
-
-  inline Core::Ref<Component> Self() {
-    return std::make_shared<Component>(*this);
-  }
 
   //! Public APIs
   inline Rect GetRect() const { return mRect; }
   inline Core::Size GetSize() const { return mRect.GetSize(); }
 
   //! ComponentManager related APIs
-  void AddChild(const ComponentRef aChild);
+  void AddChild(ComponentRef aChild);
   void RemoveChild(const ComponentRef aChild);
+  void TraverseReverse(const TraverseFunc &aFunc);
 
   inline void SetParent(const ComponentRef aParent) { mParent = aParent; }
 

@@ -19,11 +19,14 @@ ComponentManager *ComponentManager::Get() {
 }
 
 void ComponentManager::CreateRootComponent() {
-  mDesktop.reset(
-      new Desktop(nullptr, {0, 0, Application::Get()->GetWindowSize()}, {}));
+  mDesktop.reset(ComponentManager::CreateComponent<Desktop>(
+      nullptr, {0, 0, Application::Get()->GetWindowSize()}));
 }
 
-void ComponentManager::Render() { mDesktop->OnRender(); }
+void ComponentManager::Render() {
+  mDesktop->TraverseReverse(
+      [](Component &aComponent) { aComponent.OnRender(); });
+}
 
 } // namespace UI
 } // namespace Kara

@@ -14,7 +14,7 @@ Component::Component(const ComponentRef aParent, const Rect &aRect,
                                               Graphics::Color{1.0f, 1.0f, 1.0f,
                                                               1.0f})} {}
 
-void Component::AddChild(const ComponentRef aChild) {
+void Component::AddChild(ComponentRef aChild) {
   mChildren.emplace_back(aChild);
 }
 
@@ -24,6 +24,13 @@ void Component::RemoveChild(const ComponentRef aChild) {
   aChild->SetParent(nullptr);
   // TODO: Send a notification to ComponentMananger to delete this child,
   // because only desktop should be a root.
+}
+
+void Component::TraverseReverse(const TraverseFunc &aFunc) {
+  for (auto &child : mChildren) {
+    child->TraverseReverse(aFunc);
+  }
+  aFunc(*this);
 }
 
 void Component::OnRender() {
