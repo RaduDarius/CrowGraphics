@@ -27,7 +27,7 @@ Application::Application() {
 
   mUILayer = new UI::UILayer();
   mLayerStack.PushOverlay(mUILayer);
-  mLayerStack.Push(new UI::MainLayer());
+  mLayerStack.Push(new UI::TestLayer());
 
   mWindow->SetEventCallback([&](Events::Event &e) { return OnEvent(e); });
 }
