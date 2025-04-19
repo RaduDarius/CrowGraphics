@@ -3,11 +3,8 @@
 #include "Kara/Core/Core.hpp"
 #include "Kara/UI/Components/Desktop.hpp"
 #include "Kara/UI/Component.hpp"
-#include "Kara/UI/RenderObject.hpp"
 
-#include <memory>
 #include <type_traits>
-#include <vector>
 
 namespace Kara {
 namespace UI {
@@ -46,9 +43,7 @@ public:
 
   void CreateRootComponent();
 
-  static inline const std::vector<Core::Ref<RenderObject>> &GetRenderObjects() {
-    return Get()->mRenderObjects;
-  }
+  void Render();
 
 private:
   ComponentManager() = default;
@@ -61,12 +56,8 @@ private:
 
     typename C::Params params{std::forward<Args>(aArgs)...};
     auto component = std::make_shared<C>(aParent, aRect, params);
-    if (auto baseComp = std::static_pointer_cast<Component>(component)) {
-      auto obj = baseComp->GetRenderProp();
-      mRenderObjects.push_back(obj);
-    }
-
     aParent->AddChild(component);
+
     return component;
   }
 
@@ -74,8 +65,6 @@ private:
 
   //! Desktop is root of the all UI tree, so it must have a special handling.
   Core::Scope<Desktop> mDesktop;
-
-  std::vector<Core::Ref<RenderObject>> mRenderObjects;
 };
 } // namespace UI
 } // namespace Kara

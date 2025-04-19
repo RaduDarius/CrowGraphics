@@ -23,5 +23,7 @@ void ComponentManager::CreateRootComponent() {
       new Desktop(nullptr, {0, 0, Application::Get()->GetWindowSize()}, {}));
 }
 
+void ComponentManager::Render() { mDesktop->OnRender(); }
+
 } // namespace UI
 } // namespace Kara

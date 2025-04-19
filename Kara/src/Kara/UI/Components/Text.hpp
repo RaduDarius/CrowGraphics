@@ -24,8 +24,6 @@ public:
   Text(const ComponentRef aParent, const Rect &aRect, const Params &aParams);
 
 private:
-  void SetupRenderPrimitives();
-
   std::string mText;
   Font::FontFace mFont;
   Graphics::Color mTextColor;

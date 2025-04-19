@@ -25,6 +25,7 @@ public:
 
   void SetFontColor(const Color &aColor);
   void SetColor(const Color &aColor);
+  void MakeTransparent();
 
 private:
   Core::Ref<Shader> mShader;

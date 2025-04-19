@@ -2,12 +2,10 @@
 
 #include "Kara/Core/Core.hpp"
 #include "Kara/Core/Types.hpp"
-#include "Kara/UI/RenderObject.hpp"
+#include "Kara/Graphics/Material.hpp"
 #include "Kara/UI/Utils.hpp"
 
-#include <glm/glm.hpp>
-
-#include <set>
+#include <vector>
 
 namespace Kara {
 namespace UI {
@@ -28,35 +26,26 @@ public:
   inline Core::Size GetSize() const { return mRect.GetSize(); }
 
   //! ComponentManager related APIs
-  const Core::Ref<RenderObject> &GetRenderProp() const { return mRenderProp; };
-
   void AddChild(const ComponentRef aChild);
   void RemoveChild(const ComponentRef aChild);
 
   inline void SetParent(const ComponentRef aParent) { mParent = aParent; }
 
-  //! @brief Graphics primitives APIs
-  inline void SetColor(const glm::vec4 &aColor) {
-    mRenderProp->Material->SetColor(aColor);
-  }
+  virtual void OnRender();
 
-protected:
-  void SetRenderPropMaterial(const Core::Ref<Graphics::Material> &aMaterial) {
-    mRenderProp->Material = aMaterial;
+  inline void SetColor(const Graphics::Color &aColor) {
+    mMaterial->SetColor(aColor);
   }
-
-  // Render Properties
-  Core::Ref<RenderObject> mRenderProp;
+  inline void MakeTransparent() { mMaterial->MakeTransparent(); }
 
 private:
-  void SetupRenderPrimitives();
-
   // Structural Data
   ComponentRef mParent;
   std::vector<ComponentRef> mChildren;
 
   // Data Properties
   Rect mRect;
+  Core::Ref<Graphics::Material> mMaterial;
 };
 } // namespace UI
 } // namespace Kara

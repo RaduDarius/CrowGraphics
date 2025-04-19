@@ -18,8 +18,6 @@ public:
   Image(const ComponentRef aParent, const Rect &aRect, const Params &aParams);
 
 private:
-  void SetupRenderPrimitives();
-
   Kara::Image::Handle mImgHandle{Kara::Image::Handle::None};
 };
 } // namespace UI

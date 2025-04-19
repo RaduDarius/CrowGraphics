@@ -56,5 +56,13 @@ void Material::SetColor(const Color &aColor) {
   }
 }
 
+void Material::MakeTransparent() {
+  if (std::holds_alternative<Color>(mData)) {
+    auto& color = std::get<Color>(mData);
+    color.a = .0f;
+    mShader->UploadUniformVec4("uColor", color);
+  }
+}
+
 } // namespace Graphics
 } // namespace Kara

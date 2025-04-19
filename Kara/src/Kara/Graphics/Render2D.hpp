@@ -16,7 +16,8 @@ public:
   static void Clear() { RenderCommand::Clear({1.0f, 0.0f, 1.0f, 1.0f}); }
 
   static void BeginFrame();
-  static void EndFrame(const glm::mat4 &aVP, const glm::mat4 &aTransform);
+  static void EndFrame(const glm::mat4 &aVP,
+                       const glm::mat4 &aTransform = glm::mat4(1.0f));
 
   static void SubmitQuad(const Quad &aQuad,
                          const Core::Ref<Material> &aMaterial) {
