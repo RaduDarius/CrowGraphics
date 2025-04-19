@@ -25,7 +25,7 @@ void ComponentManager::CreateRootComponent() {
 
 void ComponentManager::Render() {
   mDesktop->TraverseReverse(
-      [](Component &aComponent) { aComponent.OnRender(); });
+      [](Component::ComponentRef aComponent) { aComponent->OnRender(); });
 }
 
 } // namespace UI

@@ -13,7 +13,7 @@ namespace UI {
 class Component {
 public:
   using ComponentRef = Component *;
-  using TraverseFunc = std::function<void(Component &)>;
+  using TraverseFunc = std::function<void(ComponentRef)>;
   struct Params {};
 
   Component(const ComponentRef aParent, const Rect &aRect,

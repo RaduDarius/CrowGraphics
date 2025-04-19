@@ -30,7 +30,7 @@ void Component::TraverseReverse(const TraverseFunc &aFunc) {
   for (auto &child : mChildren) {
     child->TraverseReverse(aFunc);
   }
-  aFunc(*this);
+  aFunc(this);
 }
 
 void Component::OnRender() {
