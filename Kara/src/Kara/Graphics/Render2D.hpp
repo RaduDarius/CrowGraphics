@@ -2,6 +2,7 @@
 
 #include "Kara/Core/Core.hpp"
 #include "Kara/Graphics/Material.hpp"
+#include "Kara/Graphics/RenderBatcher2D.hpp"
 #include "Kara/Graphics/RenderCommand.hpp"
 #include "Kara/Graphics/VertexArray.hpp"
 
@@ -17,12 +18,13 @@ public:
   static void BeginFrame();
   static void EndFrame(const glm::mat4 &aVP, const glm::mat4 &aTransform);
 
-  static void SubmitQuad(const Core::Ref<VertexArray> &aVertexArray,
-                         const Core::Ref<Material> &aMaterial);
+  static void SubmitQuad(const Quad &aQuad,
+                         const Core::Ref<Material> &aMaterial) {
+    smBatcher.SubmitQuad(aQuad, aMaterial);
+  }
 
 private:
-  static Core::Ref<VertexArray> smVertexArray;
-  static Core::Ref<Material> smMaterial;
+  static RenderBatcher2D smBatcher;
 };
 } // namespace Graphics
 } // namespace Kara

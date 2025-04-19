@@ -118,7 +118,8 @@ void TestLayer::OnUpdate() {
   transform = glm::translate(transform, -mCenter);
 
   Graphics::Render2D::BeginFrame();
-  Graphics::Render2D::SubmitQuad(mVertexArray, mMaterial);
+  Graphics::Render2D::SubmitQuad({{0, 0}, {100, 100}}, mMaterial);
+  Graphics::Render2D::SubmitQuad({{160, 0}, {100, 100}}, mMaterial);
   Graphics::Render2D::EndFrame(mCamera.GetVPMat(), transform);
 }
 
