@@ -7,6 +7,7 @@
 #include "Kara/Core/InputManager.hpp"
 #include "Kara/Font/FontFace.hpp"
 #include "Kara/Graphics/RenderCommand.hpp"
+#include "Kara/Graphics/Render2D.hpp"
 #include "Kara/Graphics/Renderer.hpp"
 #include "Kara/Log/Logger.hpp"
 
@@ -58,7 +59,8 @@ TestLayer::TestLayer()
   indexBuffer = Graphics::Renderer::CreateIndexBuffer(indeces, sizeof(indeces));
   mVertexArray->AddIndexBuffer(indexBuffer);
 
-  mShader = Graphics::Renderer::CreateShader(Graphics::Shader::Type::Basic);
+  mMaterial = std::make_shared<Graphics::Material>(
+      Graphics::Color{0.0f, 1.0f, 0.0f, 1.0f});
 }
 
 void TestLayer::OnRender() {
@@ -109,20 +111,15 @@ void TestLayer::OnUpdate() {
   } else if (Core::InputManager::IsKeyPressed(Events::KeyCode::E)) {
     mRotation += mObjRotationSpeed;
   }
-
   auto transform = glm::translate(glm::mat4(1.0f), mPosition);
   transform = glm::translate(transform, mCenter);
   transform =
       glm::rotate(transform, glm::radians(mRotation), glm::vec3(0, 0, 1));
   transform = glm::translate(transform, -mCenter);
 
-  mShader->Bind();
-  mShader->UploadUniformMat4("uVP", mCamera.GetVPMat());
-  mShader->UploadUniformMat4("uModel", transform);
-  mShader->UploadUniformVec4("uColor", glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-
-  mVertexArray->Bind();
-  Graphics::RenderCommand::Draw(mVertexArray);
+  Graphics::Render2D::BeginFrame();
+  Graphics::Render2D::SubmitQuad(mVertexArray, mMaterial);
+  Graphics::Render2D::EndFrame(mCamera.GetVPMat(), transform);
 }
 
 } // namespace UI

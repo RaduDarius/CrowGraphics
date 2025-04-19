@@ -4,12 +4,11 @@
 #include "Kara/Events/Event.hpp"
 #include "Kara/Graphics/Camera.hpp"
 #include "Kara/Graphics/FontTexture.hpp"
+#include "Kara/Graphics/Material.hpp"
 #include "Kara/Graphics/Shader.hpp"
 #include "Kara/Graphics/Texture.hpp"
 #include "Kara/Graphics/VertexArray.hpp"
 #include "Kara/Layers/Layer.hpp"
-
-#include <memory>
 
 namespace Kara {
 namespace UI {
@@ -24,6 +23,7 @@ private:
   Graphics::Camera mCamera;
 
   Core::Ref<Graphics::Shader> mShader;
+  Core::Ref<Graphics::Material> mMaterial;
   Core::Ref<Graphics::Shader> mTextureShader;
   Core::Ref<Graphics::Shader> mFontShader;
   Core::Ref<Graphics::Texture> mTexture;
