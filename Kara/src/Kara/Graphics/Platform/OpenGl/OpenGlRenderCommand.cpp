@@ -13,7 +13,7 @@ void RenderCommand::Init() {
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void RenderCommand::Clear(const glm::vec4 &aColor) {
+void RenderCommand::Clear(const Color &aColor) {
   glClearColor(aColor.r, aColor.g, aColor.b, aColor.a);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
