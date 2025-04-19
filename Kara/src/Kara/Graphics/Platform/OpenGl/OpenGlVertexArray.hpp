@@ -21,7 +21,7 @@ public:
   void AddVertexBuffer(const Core::Ref<VertexBuffer> &aBuffer) override;
 
   const IBContainer &GetIndexBuffer() const override;
-  const VBContainer &GetVertexBuffers() const override;
+  const VBContainer &GetVertexBuffer() const override;
 
   void Bind() const override;
   void Unbind() const override;
@@ -29,7 +29,7 @@ public:
 private:
   GLenum ElementTypeToOpenGlType(BufferElementType aType);
 
-  VBContainer mVertexBuffers;
+  VBContainer mVertexBuffer;
   IBContainer mIndexBuffer;
 
   unsigned int mRenderId;

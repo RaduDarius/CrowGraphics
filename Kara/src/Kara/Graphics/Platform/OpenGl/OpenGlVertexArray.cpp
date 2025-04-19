@@ -23,7 +23,7 @@ void OpenGlVertexArray::AddIndexBuffer(const Core::Ref<IndexBuffer> &aBuffer) {
 
 void OpenGlVertexArray::AddVertexBuffer(
     const Core::Ref<VertexBuffer> &aBuffer) {
-  mVertexBuffers.emplace_back(aBuffer);
+  mVertexBuffer = aBuffer;
 
   glBindVertexArray(mRenderId);
   aBuffer->Bind();
@@ -48,8 +48,8 @@ OpenGlVertexArray::GetIndexBuffer() const {
 }
 
 const OpenGlVertexArray::VBContainer &
-OpenGlVertexArray::GetVertexBuffers() const {
-  return mVertexBuffers;
+OpenGlVertexArray::GetVertexBuffer() const {
+  return mVertexBuffer;
 }
 
 void OpenGlVertexArray::Bind() const { glBindVertexArray(mRenderId); }

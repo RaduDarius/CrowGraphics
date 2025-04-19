@@ -12,7 +12,7 @@ namespace Graphics {
 class VertexBuffer;
 class VertexArray {
 public:
-  using VBContainer = std::vector<Core::Ref<VertexBuffer>>;
+  using VBContainer = Core::Ref<VertexBuffer>;
   using IBContainer = Core::Ref<IndexBuffer>;
 
   virtual ~VertexArray() = default;
@@ -21,7 +21,7 @@ public:
   virtual void AddVertexBuffer(const Core::Ref<VertexBuffer> &aBuffer) = 0;
 
   virtual const IBContainer &GetIndexBuffer() const = 0;
-  virtual const VBContainer &GetVertexBuffers() const = 0;
+  virtual const VBContainer &GetVertexBuffer() const = 0;
 
   virtual void Bind() const = 0;
   virtual void Unbind() const = 0;
